@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -15,17 +14,29 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public GameObject buttonMainMenu;
     public GameObject buttonBack;
 
-    private float transitionMenuTime = 0.5f;
-    private enum Menues { Main, Game, Options, Credits }
-    private Menues menuActual = Menues.Main;
     public List<CanvasGroup> menues = new List<CanvasGroup>();
 
     public AudioMixer audioMixer;
 
+    private float transitionMenuTime = 0.5f;
+    private enum Menues { Main, Game, Options, Credits }
+    private Menues menuActual = Menues.Main;
+    
     private void Start()
     {
         Time.timeScale = 0;
-        Invoke(nameof(LoadSound), 0.5f);
+        StartCoroutine(InvokeLoadSound());
+        GameManager.Get().GetPlayer().ChangeInputEnable(false);
+    }
+    IEnumerator InvokeLoadSound()
+    {
+        float onTime = 0;
+        while (onTime < 0.5f)
+        {
+            onTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        LoadSound();
     }
     void LoadSound()
     {
@@ -37,6 +48,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     {
         Time.timeScale = 1;
         StartCoroutine(SwitchPanel(transitionMenuTime, (int) Menues.Game, (int) Menues.Main));
+        GameManager.Get().GetPlayer().ChangeInputEnable(true);
     }
     public void OnButtonOptions()
     {
@@ -49,7 +61,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public void OnButtonPause()
     {
         Time.timeScale = 0;
-        
+        GameManager.Get().GetPlayer().ChangeInputEnable(false);
+
         buttonUnPause.SetActive(true);
         buttonMainMenu.SetActive(true);
         buttonBack.SetActive(false);
@@ -62,6 +75,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public void OnButtonUnPause()
     {
         Time.timeScale = 1;
+        GameManager.Get().GetPlayer().ChangeInputEnable(true);
 
         StartCoroutine(SwitchPanel(transitionMenuTime, (int)Menues.Game, (int)Menues.Options));
     }
@@ -75,18 +89,11 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     }
     public void OnButtonToMainMenu()
     {
-        // ----- Opcion 1 -----
         SceneManager.LoadScene(0);
-
-        // ----- Opcion 2 -----
-        // buttonUnPause.SetActive(true);
-        // buttonBack.SetActive(false);
-        // StartCoroutine(SwitchPanel(transitionMenuTime, (int)Menues.Main, (int)Menues.Options));
-        // Todo: Reinicio del nivel.
     }
     public void OnButtonSwitchYingYang()
     {
-        // Llamar a la funcion del player a travez del GameManager
+        GameManager.Get().GetPlayer().Switch();
     }
     public void ChangeVolGral(float value)
     {
