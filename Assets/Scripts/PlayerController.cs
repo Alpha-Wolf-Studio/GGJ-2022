@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;
     [SerializeField] private LayerMask jumpeableMask = default;
+    [SerializeField] private LayerMask defaultMask = default;
 
     private PlayerStats currentStats = null;
 
@@ -75,8 +76,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            yingEnabled = !yingEnabled;
-            SetStats();
+            if (!Physics2D.BoxCast(transform.position, currentStats.BoxCollider2d.size, 0f, Vector2.zero, 0f, defaultMask))
+            {
+                yingEnabled = !yingEnabled;
+                SetStats();
+            }
         }
     }
 
