@@ -1,20 +1,31 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstaclesManager : MonoBehaviour
 {
+
+    public Action OnSpikeTouched;
+
     [SerializeField] GameObject yingObjectsBase;
     Obstacle[] yingObjects;
 
     [SerializeField] GameObject yangObjectsBase;
     Obstacle[] yangObjects;
 
+    [SerializeField] GameObject spikesObjectsBase;
+    Spike[] spikes;
+
     private void Start()
     {
-        Gamemanager.Get().OnColorChange += ChangeState;
+        GameManager.Get().OnColorChange += ChangeState;
         yingObjects = yingObjectsBase.GetComponentsInChildren<Obstacle>();
         yangObjects = yangObjectsBase.GetComponentsInChildren<Obstacle>();
+        spikes = spikesObjectsBase.GetComponentsInChildren<Spike>();
+        foreach (var spike in spikes)
+        {
+            spike.OnTouch += SpikeTouch;
+        }
     }
 
     void ChangeState(bool yingState) 
@@ -41,6 +52,11 @@ public class ObstaclesManager : MonoBehaviour
                 o.Disactivate();
             }
         }
+    }
+
+    void SpikeTouch() 
+    {
+        OnSpikeTouched?.Invoke();
     }
 
 }

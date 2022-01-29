@@ -3,30 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Gamemanager : MonoBehaviourSingleton<Gamemanager>
+public class GameManager : MonoBehaviourSingleton<GameManager>
 {
 
-    bool YingState = true;
-    public Action<bool> OnColorChange;
-    // Start is called before the first frame update
+    [SerializeField] PlayerController player;
+    [SerializeField] ObstaclesManager obstaclesManager;
 
+    Vector3 playerLastSavedPosition;
+
+    bool yingState = true;
+    public Action<bool> OnColorChange;
+
+    private void Start()
+    {
+        obstaclesManager.OnSpikeTouched += PlayerTouchedSpike;
+        playerLastSavedPosition = player.transform.position;
+    }
     public void InvertColor() 
     {
-        YingState = !YingState;
-        OnColorChange?.Invoke(YingState);
+        yingState = !yingState;
+        OnColorChange?.Invoke(yingState);
     }
 
-    void Start()
+    void PlayerTouchedSpike() 
     {
-        
+        player.transform.position = playerLastSavedPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NewPlayerSavedPosition(Vector3 newPosition) 
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            InvertColor();
-        }
+        playerLastSavedPosition = newPosition;
     }
 }

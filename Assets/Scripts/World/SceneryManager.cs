@@ -16,7 +16,7 @@ public class SceneryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Gamemanager.Get().OnColorChange += ChangeColor;
+        GameManager.Get().OnColorChange += ChangeColor;
     }
 
     public void ChangeColor(bool yingState) 
