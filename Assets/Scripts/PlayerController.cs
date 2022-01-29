@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float groundDistance = 0f;
     private float halfWidth = 0f;
 
+    public void ChangeInputEnable(bool state) => inputEnabled = state;
+
     private void Start()
     {
         SetStats();
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
                     jumpeableMask));
     }
 
-    private void Switch()
+    public void Switch()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {

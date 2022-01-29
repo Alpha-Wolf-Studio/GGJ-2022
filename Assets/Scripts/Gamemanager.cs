@@ -6,6 +6,8 @@ using System;
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
 
+    public PlayerController GetPlayer() => player;
+
     [SerializeField] PlayerController player;
     [SerializeField] ObstaclesManager obstaclesManager;
 
