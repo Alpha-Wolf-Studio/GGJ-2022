@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStats currentStats = null;
 
     private bool isAttacking = false;
+    private bool flipped = false;
     private bool inputEnabled = true;
     private float groundDistance = 0f;
     private float halfWidth = 0f;
@@ -43,10 +44,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             rigid.AddForce(Vector3.left * currentStats.MoveForce * Time.deltaTime, ForceMode2D.Force);
+
+            if (!flipped)
+            {
+                Flip();
+            }
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             rigid.AddForce(Vector3.right * currentStats.MoveForce * Time.deltaTime, ForceMode2D.Force);
+
+            if (flipped)
+            {
+                Flip();
+            }
         }
     }
 
@@ -80,7 +91,8 @@ public class PlayerController : MonoBehaviour
                 {
                     timer += Time.deltaTime;
 
-                    RaycastHit2D hit2d = Physics2D.Raycast(transform.position, transform.right, currentStats.AttackDistance, breakeableMask);
+                    Vector3 dir = flipped ? Vector3.left : Vector3.right;
+                    RaycastHit2D hit2d = Physics2D.Raycast(transform.position, dir, currentStats.AttackDistance, breakeableMask);
                     if (hit2d.collider)
                     {
                         BreakeableObstacle breakeableObstacle = hit2d.collider.GetComponent<BreakeableObstacle>();
@@ -99,6 +111,12 @@ public class PlayerController : MonoBehaviour
             isAttacking = true;
             StartCoroutine(Attacking());
         }
+    }
+
+    private void Flip()
+    {
+        flipped = !flipped;
+        currentStats.SpriteRend.flipX = flipped;
     }
 
     private void ExtraGravity()
@@ -140,6 +158,7 @@ public class PlayerController : MonoBehaviour
     private void SetStats()
     {
         currentStats = yinEnabled ? yinStats : yangStats;
+        currentStats.SpriteRend.flipX = flipped;
         SetMeasures();
 
         yinStats.gameObject.SetActive(yinEnabled);
