@@ -6,10 +6,11 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private LayerMask movableMask = default;
-    [SerializeField] float speed = .25f;
-    [SerializeField] List<Transform> waypoints;
-    int currentWaypoint = 0;
-    float currentPosition = 0;
+    [SerializeField] private float speed = .25f;
+    [SerializeField] private List<Transform> waypoints;
+
+    private int currentWaypoint = 0;
+    private float currentPosition = 0;
 
     private PlayerController player = null;
 
@@ -30,26 +31,26 @@ public class MovingPlatform : MonoBehaviour
         if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
         {
             player = other.transform.parent.gameObject.GetComponent<PlayerController>();
+            player.transform.SetParent(transform);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    /*private void OnTriggerStay2D(Collider2D other)
     {
         if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
         {
             if (player != null)
             {
-                //mover personaje
-                //player.transform.Translate(transform.position * Time.deltaTime); no funca :c
-                //player.Rigid.MovePosition(transform.position * Time.deltaTime); tampoco funca :c
+                
             }
         }
-    }
+    }*/
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
         {
+            player.transform.SetParent(null);
             player = null;
         }
     }
