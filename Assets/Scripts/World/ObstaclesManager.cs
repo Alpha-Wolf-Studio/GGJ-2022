@@ -22,6 +22,9 @@ public class ObstaclesManager : MonoBehaviour
     [SerializeField] GameObject pickeableObjectsBase;
     Pickeable[] pickeables;
 
+    [SerializeField] GameObject fakeGroundObjectsBase;
+    FakeGroundObstacle[] fakeGrounds;
+
     private void Start()
     {
         GameManager.Get().OnColorChange += ChangeState;
@@ -30,6 +33,7 @@ public class ObstaclesManager : MonoBehaviour
         boxesObjects = boxesObjectsBase.GetComponentsInChildren<IObstacle>();
         spikes = spikesObjectsBase.GetComponentsInChildren<Spike>();
         pickeables = pickeableObjectsBase.GetComponentsInChildren<Pickeable>();
+        fakeGrounds = fakeGroundObjectsBase.GetComponentsInChildren<FakeGroundObstacle>();
         foreach (var spike in spikes)
         {
             spike.OnTouch += SpikeTouch;
@@ -60,6 +64,10 @@ public class ObstaclesManager : MonoBehaviour
             {
                 if(pickeable != null) pickeable.Activate();
             }
+            foreach (var fakeGround in fakeGrounds)
+            {
+                if (fakeGround != null) fakeGround.Activate();
+            }
         }
         else 
         {
@@ -82,6 +90,10 @@ public class ObstaclesManager : MonoBehaviour
             foreach (var pickeable in pickeables)
             {
                 if (pickeable != null) pickeable.Disactivate();
+            }
+            foreach (var fakeGround in fakeGrounds)
+            {
+                if (fakeGround != null) fakeGround.Disactivate();
             }
         }
     }

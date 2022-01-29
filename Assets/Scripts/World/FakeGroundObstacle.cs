@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class FakeGroundObstacle : MonoBehaviour, IObstacle
 {
-    [SerializeField] SpriteRenderer baseRenderer;
-    [SerializeField] SpriteRenderer bgRenderer;
+    SpriteRenderer rend;
+
+    private void Start()
+    {
+        rend = GetComponent<SpriteRenderer>();
+    }
 
     public void Activate()
     {
-        baseRenderer.color = Utils.OniWhite;
+        rend.color = Utils.OniWhite;
     }
 
     public void Disactivate()
     {
-        baseRenderer.color = Utils.OniWhite;
+        rend.color = Utils.OniBlack;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        baseRenderer.enabled = false;
-        bgRenderer.enabled = false;
+        Destroy(gameObject);
     }
 }

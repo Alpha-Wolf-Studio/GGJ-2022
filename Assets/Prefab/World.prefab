@@ -472,8 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500f9cfb67e5f7b4fa93d2329e543e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseRenderer: {fileID: 136189742}
-  bgRenderer: {fileID: 1795478600}
 --- !u!61 &136189743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16721,6 +16719,7 @@ MonoBehaviour:
   boxesObjectsBase: {fileID: 1998312333}
   spikesObjectsBase: {fileID: 8071149874454257686}
   pickeableObjectsBase: {fileID: 2061080864}
+  fakeGroundObjectsBase: {fileID: 943215636}
 --- !u!1 &8071149874282693123
 GameObject:
   m_ObjectHideFlags: 0
