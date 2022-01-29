@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class AlternateObstacle : MonoBehaviour
+public class AlternateObstacle : MonoBehaviour, IObstacle
 {
     [Header("Setting Obstacle:")]
     [SerializeField] private float visibleTime = 1;
@@ -60,5 +60,13 @@ public class AlternateObstacle : MonoBehaviour
             yield return null;
         }
         TurnVisibility(visibility);
+    }
+    public void Activate()
+    {
+        onTime = 0;
+    }
+    public void Disactivate()
+    {
+
     }
 }
