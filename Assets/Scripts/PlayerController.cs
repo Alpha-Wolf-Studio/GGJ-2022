@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStats currentStats = null;
 
-    private bool inputEnabled = false;
+    private bool inputEnabled = true;
     private float groundDistance = 0f;
     private float halfWidth = 0f;
 
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (inputEnabled)
+        if (!inputEnabled)
             return;
 
         Switch();

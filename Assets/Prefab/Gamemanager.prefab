@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104da0e8c46c93d4480f853e435c7b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  player: {fileID: 0}
+  obstaclesManager: {fileID: 0}
