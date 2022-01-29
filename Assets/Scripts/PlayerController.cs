@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (CheckGround() || currentStats.DoubleJump && !firstJumpStarted)
             {
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (!currentStats.AttackEnabled && !isAttacking)
+        if (!currentStats.AttackEnabled || isAttacking)
             return;
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     public void Switch()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             if (!Physics2D.BoxCast(transform.position, currentStats.BoxCollider2d.size, 0f, Vector2.zero, 0f, defaultMask))
             {

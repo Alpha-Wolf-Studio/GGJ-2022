@@ -338,7 +338,7 @@ MonoBehaviour:
   fallExtraGravity: 0.25
   doubleJump: 0
   attackEnabled: 1
-  attackDistance: 2
+  attackDistance: 10
   attackCooldown: 1.5
   boxCollider2d: {fileID: 3168344267898339748}
 --- !u!1 &6955829181309680232
@@ -397,7 +397,7 @@ MonoBehaviour:
     m_Bits: 1
   breakeableMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   defaultMask:
     serializedVersion: 2
     m_Bits: 1
