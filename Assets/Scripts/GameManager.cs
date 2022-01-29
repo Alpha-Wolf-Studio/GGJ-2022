@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] ObstaclesManager obstaclesManager;
 
     Vector3 playerLastSavedPosition;
+    public Action OnNewCheckpoint;
 
     bool yingState = true;
     public Action<bool> OnColorChange;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void NewPlayerSavedPosition(Vector3 newPosition) 
     {
+        OnNewCheckpoint?.Invoke();
         playerLastSavedPosition = newPosition;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -949,6 +949,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2406542634614289715, guid: 8cae5c8b7ab77834d87d3ed6ab416220,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406542634614289715, guid: 8cae5c8b7ab77834d87d3ed6ab416220,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3168344267898339748, guid: 8cae5c8b7ab77834d87d3ed6ab416220,
         type: 3}
       propertyPath: m_Size.x
@@ -989,6 +999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpForce
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217307711357202649, guid: 8cae5c8b7ab77834d87d3ed6ab416220,
+        type: 3}
+      propertyPath: fallExtraGravity
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4497656322598150779, guid: 8cae5c8b7ab77834d87d3ed6ab416220,
         type: 3}
