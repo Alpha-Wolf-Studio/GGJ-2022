@@ -39,19 +39,19 @@ public class Checkpoint : MonoBehaviour
         int numberOfAliveParticles = ownParticleSystem.GetParticles(aliveParticles);
         if (yingState) 
         {
-            module.startColor = ColorGeneral.OniWhite;
+            module.startColor = Utils.OniWhite;
             for (int i = 0; i < numberOfAliveParticles; i++)
             {
-                aliveParticles[i].startColor = ColorGeneral.OniWhite;
+                aliveParticles[i].startColor = Utils.OniWhite;
             }
         }
         else 
         {
             
-            module.startColor = ColorGeneral.OniBlack;
+            module.startColor = Utils.OniBlack;
             for (int i = 0; i < numberOfAliveParticles; i++)
             {
-                aliveParticles[i].startColor = ColorGeneral.OniBlack;
+                aliveParticles[i].startColor = Utils.OniBlack;
             }
         }
         ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);

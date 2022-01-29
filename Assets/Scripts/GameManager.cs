@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     bool yingState = true;
     public Action<bool> OnColorChange;
+    
+    int currentPickeableAmount = 0;
+    public Action<int> OnCurrencyChange;
 
     private void Start()
     {
-        obstaclesManager.OnSpikeTouched += PlayerTouchedSpike;
+        obstaclesManager.OnSpikeTouched += PlayerMoveToSpawn;
         playerLastSavedPosition = player.transform.position;
     }
 
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         OnColorChange?.Invoke(yingState);
     }
 
-    void PlayerTouchedSpike() 
+    void PlayerMoveToSpawn() 
     {
         player.transform.position = playerLastSavedPosition;
     }
@@ -38,5 +41,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         OnNewCheckpoint?.Invoke();
         playerLastSavedPosition = newPosition;
+    }
+
+    public void PlayerPickUp() 
+    {
+        currentPickeableAmount++;
+        OnCurrencyChange?.Invoke(currentPickeableAmount);
     }
 }
