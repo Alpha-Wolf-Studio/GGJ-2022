@@ -58,7 +58,7 @@ public class ObstaclesManager : MonoBehaviour
             }
             foreach (var pickeable in pickeables)
             {
-                pickeable.Activate();
+                if(pickeable != null) pickeable.Activate();
             }
         }
         else 
@@ -81,7 +81,7 @@ public class ObstaclesManager : MonoBehaviour
             }
             foreach (var pickeable in pickeables)
             {
-                pickeable.Disactivate();
+                if (pickeable != null) pickeable.Disactivate();
             }
         }
     }
