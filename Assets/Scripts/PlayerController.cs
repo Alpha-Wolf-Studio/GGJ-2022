@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private float halfWidth = 0f;
     private bool firstJumpStarted = false;
 
+    public Rigidbody2D Rigid => rigid;
+
     public void ChangeInputEnable(bool state) => inputEnabled = state;
 
     private void Start()
