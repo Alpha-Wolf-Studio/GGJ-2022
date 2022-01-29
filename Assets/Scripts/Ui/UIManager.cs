@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviourSingleton<UIManager>
@@ -15,18 +16,22 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public GameObject buttonBack;
 
     private float transitionMenuTime = 0.5f;
-
     private enum Menues { Main, Game, Options, Credits }
     private Menues menuActual = Menues.Main;
     public List<CanvasGroup> menues = new List<CanvasGroup>();
 
+    public AudioMixer audioMixer;
+
     private void Start()
     {
         Time.timeScale = 0;
+        Invoke(nameof(LoadSound), 0.5f);
     }
-    private void Update()
+    void LoadSound()
     {
-        
+        audioMixer.SetFloat("volGral", sliderVolGral.value);
+        audioMixer.SetFloat("volMusic", sliderVolMusic.value);
+        audioMixer.SetFloat("volFx", sliderVolFx.value);
     }
     public void OnButtonPlay()
     {
@@ -85,15 +90,15 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     }
     public void ChangeVolGral(float value)
     {
-        // Cambiar volumen del AudioManager
+        audioMixer.SetFloat("volGral", value);
     }
     public void ChangeVolMusic(float value)
     {
-        // Cambiar volumen del AudioManager
+        audioMixer.SetFloat("volMusic", value);
     }
     public void ChangeVolFx(float value)
     {
-        // Cambiar volumen del AudioManager
+        audioMixer.SetFloat("volFx", value);
     }
     public void SwitchPanel(int otherMenu)
     {
