@@ -14,12 +14,12 @@ public class Spike : MonoBehaviour, IObstacle
 
     public void Activate()
     {
-        rend.color = ColorGeneral.OniWhite;
+        rend.color = Utils.OniWhite;
     }
 
     public void Disactivate()
     {
-        rend.color = ColorGeneral.OniBlack;
+        rend.color = Utils.OniBlack;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

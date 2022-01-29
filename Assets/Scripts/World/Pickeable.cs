@@ -37,30 +37,30 @@ public class Pickeable : MonoBehaviour, IObstacle
 
     public void Activate()
     {
-        rend.color = ColorGeneral.OniWhite;
+        rend.color = Utils.OniWhite;
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
         aliveParticles = new ParticleSystem.Particle[module.maxParticles];
         int numberOfAliveParticles = ownParticleSystem.GetParticles(aliveParticles);
-        module.startColor = ColorGeneral.OniWhite;
+        module.startColor = Utils.OniWhite;
         for (int i = 0; i < numberOfAliveParticles; i++)
         {
-            aliveParticles[i].startColor = ColorGeneral.OniWhite;
+            aliveParticles[i].startColor = Utils.OniWhite;
         }
         ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);
     }
 
     public void Disactivate()
     {
-        rend.color = ColorGeneral.OniBlack;
+        rend.color = Utils.OniBlack;
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
         aliveParticles = new ParticleSystem.Particle[module.maxParticles];
         int numberOfAliveParticles = ownParticleSystem.GetParticles(aliveParticles);
-        module.startColor = ColorGeneral.OniBlack;
+        module.startColor = Utils.OniBlack;
         for (int i = 0; i < numberOfAliveParticles; i++)
         {
-            aliveParticles[i].startColor = ColorGeneral.OniBlack;
+            aliveParticles[i].startColor = Utils.OniBlack;
         }
         ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);
     }
