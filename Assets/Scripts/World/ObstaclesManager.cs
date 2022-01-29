@@ -8,10 +8,13 @@ public class ObstaclesManager : MonoBehaviour
     public Action OnSpikeTouched;
 
     [SerializeField] GameObject yingObjectsBase;
-    Obstacle[] yingObjects;
+    IObstacle[] yingObjects;
 
     [SerializeField] GameObject yangObjectsBase;
-    Obstacle[] yangObjects;
+    IObstacle[] yangObjects;
+
+    [SerializeField] GameObject boxesObjectsBase;
+    IObstacle[] boxesObjects;
 
     [SerializeField] GameObject spikesObjectsBase;
     Spike[] spikes;
@@ -19,8 +22,9 @@ public class ObstaclesManager : MonoBehaviour
     private void Start()
     {
         GameManager.Get().OnColorChange += ChangeState;
-        yingObjects = yingObjectsBase.GetComponentsInChildren<Obstacle>();
-        yangObjects = yangObjectsBase.GetComponentsInChildren<Obstacle>();
+        yingObjects = yingObjectsBase.GetComponentsInChildren<IObstacle>();
+        yangObjects = yangObjectsBase.GetComponentsInChildren<IObstacle>();
+        boxesObjects = boxesObjectsBase.GetComponentsInChildren<IObstacle>();
         spikes = spikesObjectsBase.GetComponentsInChildren<Spike>();
         foreach (var spike in spikes)
         {
@@ -32,22 +36,30 @@ public class ObstaclesManager : MonoBehaviour
     {
         if (yingState) 
         {
-            foreach(Obstacle o in yingObjects) 
+            foreach (IObstacle o in boxesObjects)
             {
                 o.Activate();
             }
-            foreach (Obstacle o in yangObjects)
+            foreach (IObstacle o in yingObjects) 
+            {
+                o.Activate();
+            }
+            foreach (IObstacle o in yangObjects)
             {
                 o.Disactivate();
             }
         }
         else 
         {
-            foreach (Obstacle o in yangObjects)
+            foreach (IObstacle o in yangObjects)
             {
                 o.Activate();
             }
-            foreach (Obstacle o in yingObjects)
+            foreach (IObstacle o in yingObjects)
+            {
+                o.Disactivate();
+            }
+            foreach (IObstacle o in boxesObjects)
             {
                 o.Disactivate();
             }
