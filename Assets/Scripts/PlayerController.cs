@@ -2,30 +2,29 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveForce = 0f;
-    [SerializeField] private float jumpForce = 0f;
-    [SerializeField] private float fallExtraGravity = 0f;
+    [SerializeField] private bool yingEnabled = false;
+    [SerializeField] private PlayerStats yingStats = null;
+    [SerializeField] private PlayerStats yangStats = null;
+    [SerializeField] private Rigidbody2D rigid = null;
     [SerializeField] private LayerMask jumpeableMask = default;
 
-    private bool death = false;
+    private PlayerStats currentStats = null;
+
+    private bool inputEnabled = false;
     private float groundDistance = 0f;
     private float halfWidth = 0f;
-    private Rigidbody2D rigid = null;
 
     private void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
-
-        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
-        groundDistance = bounds.extents.y + 0.05f;
-        halfWidth = bounds.extents.x;
+        SetStats();
     }
 
     private void Update()
     {
-        if (death)
+        if (inputEnabled)
             return;
 
+        Switch();
         Move();
         Jump();
         ExtraGravity();
@@ -35,11 +34,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            rigid.AddForce(Vector3.left * moveForce * Time.deltaTime, ForceMode2D.Force);
+            rigid.AddForce(Vector3.left * currentStats.MoveForce * Time.deltaTime, ForceMode2D.Force);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            rigid.AddForce(Vector3.right * moveForce * Time.deltaTime, ForceMode2D.Force);
+            rigid.AddForce(Vector3.right * currentStats.MoveForce * Time.deltaTime, ForceMode2D.Force);
         }
     }
 
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
         {
             if (CheckGround())
             {
-                rigid.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                rigid.AddForce(Vector3.up * currentStats.JumpForce, ForceMode2D.Impulse);
             }
         }
     }
@@ -58,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!CheckGround())
         {
-            rigid.AddForce(Physics2D.gravity * fallExtraGravity);
+            rigid.AddForce(Physics2D.gravity * currentStats.FallExtraGravity);
         }
     }
 
@@ -68,5 +67,30 @@ public class PlayerController : MonoBehaviour
                     jumpeableMask) ||
                 Physics2D.Raycast(transform.position + new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
                     jumpeableMask));
+    }
+
+    private void Switch()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            yingEnabled = !yingEnabled;
+            SetStats();
+        }
+    }
+
+    private void SetStats()
+    {
+        currentStats = yingEnabled ? yingStats : yangStats;
+        SetMeasures();
+
+        yingStats.gameObject.SetActive(yingEnabled);
+        yangStats.gameObject.SetActive(!yingEnabled);
+    }
+
+    private void SetMeasures()
+    {
+        Vector2 size = currentStats.BoxCollider2d.size;
+        groundDistance = transform.localScale.y * size.y / 2 + 0.05f;
+        halfWidth = transform.localScale.x * size.x / 2;
     }
 }
