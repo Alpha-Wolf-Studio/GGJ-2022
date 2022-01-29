@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool inputEnabled = true;
     private float groundDistance = 0f;
     private float halfWidth = 0f;
+    private bool firstJumpStarted = false;
 
     public void ChangeInputEnable(bool state) => inputEnabled = state;
 
@@ -49,9 +50,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (CheckGround())
+            if (CheckGround() || currentStats.DoubleJump && !firstJumpStarted)
             {
                 rigid.AddForce(Vector3.up * currentStats.JumpForce, ForceMode2D.Impulse);
+
+                if (currentStats.DoubleJump)
+                {
+                    firstJumpStarted = true;
+                }
             }
         }
     }
@@ -61,6 +67,13 @@ public class PlayerController : MonoBehaviour
         if (!CheckGround())
         {
             rigid.AddForce(Physics2D.gravity * currentStats.FallExtraGravity);
+        }
+        else
+        {
+            if (currentStats.DoubleJump)
+            {
+                firstJumpStarted = false;
+            }
         }
     }
 
