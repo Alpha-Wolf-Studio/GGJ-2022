@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;
     [SerializeField] private LayerMask jumpeableMask = default;
-    [SerializeField] private LayerMask breakeableMask = default;
+    [SerializeField] private LayerMask interactMask = default;
     [SerializeField] private LayerMask defaultMask = default;
 
     private PlayerStats currentStats = null;
 
-    private bool isAttacking = false;
+    private bool isInteracting = false;
     private bool flipped = false;
     private bool inputEnabled = true;
     private float groundDistance = 0f;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (!currentStats.AttackEnabled || isAttacking)
+        if (isInteracting)
             return;
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -89,29 +89,44 @@ public class PlayerController : MonoBehaviour
             IEnumerator Attacking()
             {
                 float timer = 0f;
+                Interact(currentStats.AttackEnabled);
                 while (timer < currentStats.AttackCooldown)
                 {
                     timer += Time.deltaTime;
-
-                    Vector3 dir = flipped ? Vector3.left : Vector3.right;
-                    RaycastHit2D hit2d = Physics2D.Raycast(transform.position, dir, currentStats.AttackDistance, breakeableMask);
-                    if (hit2d.collider)
-                    {
-                        BreakeableObstacle breakeableObstacle = hit2d.collider.GetComponent<BreakeableObstacle>();
-                        if (breakeableObstacle)
-                        {
-                            breakeableObstacle.Break();
-                        }
-                    }
-
                     yield return new WaitForEndOfFrame();
                 }
 
-                isAttacking = false;
+                isInteracting = false;
             }
 
-            isAttacking = true;
+            isInteracting = true;
             StartCoroutine(Attacking());
+        }
+    }
+
+    private void Interact(bool yingState)
+    {
+        Vector3 dir = flipped ? Vector3.left : Vector3.right;
+        RaycastHit2D hit2d = Physics2D.Raycast(transform.position, dir, currentStats.InteractDistance, interactMask);
+
+        if (hit2d.collider)
+        {
+            if (yingState)
+            {
+                BreakeableObstacle breakeableObstacle = hit2d.collider.GetComponent<BreakeableObstacle>();
+                if (breakeableObstacle)
+                {
+                    breakeableObstacle.Break();
+                }
+            }
+            else
+            {
+                Interactable interactableObject = hit2d.collider.GetComponent<Interactable>();
+                if (interactableObject)
+                {
+                    interactableObject.Interact();
+                }
+            }
         }
     }
 

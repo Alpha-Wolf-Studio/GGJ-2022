@@ -7,16 +7,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float fallExtraGravity = 0f;
     [SerializeField] private bool doubleJump = false;
     [SerializeField] private bool attackEnabled = false;
-    [SerializeField] private float attackDistance = 0f;
-    [SerializeField] private float attackCooldown = 0f;
+    [SerializeField] private float interactionDistance = 0f;
+    [SerializeField] private float interactionCooldown = 0f;
     [SerializeField] private SpriteRenderer spriteRenderer = null;
     [SerializeField] private BoxCollider2D boxCollider2d = null;
 
     public float MoveForce => moveForce;
     public float JumpForce => jumpForce;
     public float FallExtraGravity => fallExtraGravity;
-    public float AttackDistance => attackDistance;
-    public float AttackCooldown => attackCooldown;
+    public float InteractDistance => interactionDistance;
+    public float AttackCooldown => interactionCooldown;
     public bool DoubleJump => doubleJump;
     public bool AttackEnabled => attackEnabled;
     public SpriteRenderer SpriteRend => spriteRenderer;
