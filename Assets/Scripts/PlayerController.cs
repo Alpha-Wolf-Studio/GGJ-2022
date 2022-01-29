@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private bool yinEnabled = false;
+    [SerializeField] private bool yinEnabled = true;
     [SerializeField] private PlayerStats yinStats = null;
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;
@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
             if (!Physics2D.BoxCast(transform.position, currentStats.BoxCollider2d.size, 0f, Vector2.zero, 0f, defaultMask))
             {
                 yinEnabled = !yinEnabled;
+                GameManager.Get().InvertColor();
                 SetStats();
             }
         }

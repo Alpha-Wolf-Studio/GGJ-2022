@@ -23,14 +23,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         playerLastSavedPosition = player.transform.position;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R)) 
-        {
-            InvertColor();
-        }
-    }
-
     public void InvertColor() 
     {
         yingState = !yingState;

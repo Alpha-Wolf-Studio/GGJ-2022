@@ -36,6 +36,10 @@ public class ObstaclesManager : MonoBehaviour
     {
         if (yingState) 
         {
+            foreach (IObstacle o in yangObjects)
+            {
+                o.Disactivate();
+            }
             foreach (IObstacle o in boxesObjects)
             {
                 o.Activate();
@@ -44,9 +48,9 @@ public class ObstaclesManager : MonoBehaviour
             {
                 o.Activate();
             }
-            foreach (IObstacle o in yangObjects)
+            foreach (var spike in spikes)
             {
-                o.Disactivate();
+                spike.Activate();
             }
         }
         else 
@@ -62,6 +66,10 @@ public class ObstaclesManager : MonoBehaviour
             foreach (IObstacle o in boxesObjects)
             {
                 o.Disactivate();
+            }
+            foreach (var spike in spikes)
+            {
+                spike.Disactivate();
             }
         }
     }
