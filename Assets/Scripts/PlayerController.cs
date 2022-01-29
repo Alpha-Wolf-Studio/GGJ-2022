@@ -1,16 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private bool yingEnabled = false;
-    [SerializeField] private PlayerStats yingStats = null;
+    [SerializeField] private bool yinEnabled = false;
+    [SerializeField] private PlayerStats yinStats = null;
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;
     [SerializeField] private LayerMask jumpeableMask = default;
+    [SerializeField] private LayerMask breakeableMask = default;
     [SerializeField] private LayerMask defaultMask = default;
 
     private PlayerStats currentStats = null;
 
+    private bool isAttacking = false;
     private bool inputEnabled = true;
     private float groundDistance = 0f;
     private float halfWidth = 0f;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
         Switch();
         Move();
         Jump();
+        Attack();
         ExtraGravity();
     }
 
@@ -59,6 +63,41 @@ public class PlayerController : MonoBehaviour
                     firstJumpStarted = true;
                 }
             }
+        }
+    }
+
+    private void Attack()
+    {
+        if (!currentStats.AttackEnabled && !isAttacking)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            IEnumerator Attacking()
+            {
+                float timer = 0f;
+                while (timer < currentStats.AttackCooldown)
+                {
+                    timer += Time.deltaTime;
+
+                    RaycastHit2D hit2d = Physics2D.Raycast(transform.position, transform.right, currentStats.AttackDistance, breakeableMask);
+                    if (hit2d.collider)
+                    {
+                        BreakeableObstacle breakeableObstacle = hit2d.collider.GetComponent<BreakeableObstacle>();
+                        if (breakeableObstacle)
+                        {
+                            breakeableObstacle.Break();
+                        }
+                    }
+
+                    yield return new WaitForEndOfFrame();
+                }
+
+                isAttacking = false;
+            }
+
+            isAttacking = true;
+            StartCoroutine(Attacking());
         }
     }
 
@@ -91,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!Physics2D.BoxCast(transform.position, currentStats.BoxCollider2d.size, 0f, Vector2.zero, 0f, defaultMask))
             {
-                yingEnabled = !yingEnabled;
+                yinEnabled = !yinEnabled;
                 SetStats();
             }
         }
@@ -99,11 +138,11 @@ public class PlayerController : MonoBehaviour
 
     private void SetStats()
     {
-        currentStats = yingEnabled ? yingStats : yangStats;
+        currentStats = yinEnabled ? yinStats : yangStats;
         SetMeasures();
 
-        yingStats.gameObject.SetActive(yingEnabled);
-        yangStats.gameObject.SetActive(!yingEnabled);
+        yinStats.gameObject.SetActive(yinEnabled);
+        yangStats.gameObject.SetActive(!yinEnabled);
     }
 
     private void SetMeasures()

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9013976488216938677}
   - component: {fileID: 4217307711357202649}
   m_Layer: 8
-  m_Name: Ying
+  m_Name: Yin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,8 +338,8 @@ MonoBehaviour:
   fallExtraGravity: 0.25
   doubleJump: 0
   attackEnabled: 1
-  attackDistance: 0
-  attackCooldown: 0
+  attackDistance: 2
+  attackCooldown: 1.5
   boxCollider2d: {fileID: 3168344267898339748}
 --- !u!1 &6955829181309680232
 GameObject:
@@ -388,11 +388,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f22db9cf30c94b4d9f71bdd3c4121b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yingEnabled: 1
-  yingStats: {fileID: 4217307711357202649}
+  yinEnabled: 1
+  yinStats: {fileID: 4217307711357202649}
   yangStats: {fileID: 5298099716109512771}
   rigid: {fileID: 2406542634614289715}
   jumpeableMask:
+    serializedVersion: 2
+    m_Bits: 1
+  breakeableMask:
+    serializedVersion: 2
+    m_Bits: 0
+  defaultMask:
     serializedVersion: 2
     m_Bits: 1
 --- !u!50 &2406542634614289715
