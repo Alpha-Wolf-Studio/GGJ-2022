@@ -15,7 +15,7 @@ public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     
     [Header("Sound Effect:")]
     [SerializeField] private bool hasSound = false;
-    private AudioSource audio;
+    private AudioSource audioFx;
 
     [Header("Effect Scale:")]
     [SerializeField] private float scaleSpeed= 3;
@@ -49,7 +49,7 @@ public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             GetComponent<Image>().alphaHitTestMinimumThreshold = alphaRayCast;
 
         if (hasSound)
-            audio = GetComponent<AudioSource>();
+            audioFx = GetComponent<AudioSource>();
 
         if (modifyImage)
             currentImage = GetComponent<Image>();
@@ -86,7 +86,7 @@ public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnMouseEnterButton()
     {
         if (hasSound)
-            audio.Play();
+            audioFx.Play();
 
         onButtonEnter?.Invoke();
         increment = true;
