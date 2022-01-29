@@ -153,9 +153,9 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckGround()
     {
-        return (Physics2D.Raycast(transform.position - new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
+        return (Physics2D.Raycast(currentStats.transform.position - new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
                     jumpeableMask) ||
-                Physics2D.Raycast(transform.position + new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
+                Physics2D.Raycast(currentStats.transform.position + new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
                     jumpeableMask));
     }
 
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     private void SetMeasures()
     {
         Vector2 size = currentStats.BoxCollider2d.size;
-        groundDistance = transform.localScale.y * size.y / 2 + 0.05f;
+        groundDistance = transform.localScale.y * size.y / 2 + 0.075f;
         halfWidth = transform.localScale.x * size.x / 2;
     }
 }
