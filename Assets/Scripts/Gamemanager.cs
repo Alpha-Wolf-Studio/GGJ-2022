@@ -19,6 +19,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         obstaclesManager.OnSpikeTouched += PlayerTouchedSpike;
         playerLastSavedPosition = player.transform.position;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            InvertColor();
+        }
+    }
+
     public void InvertColor() 
     {
         yingState = !yingState;
