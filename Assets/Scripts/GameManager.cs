@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void Start()
     {
-        obstaclesManager.OnSpikeTouched += PlayerMoveToSpawn;
+        obstaclesManager.OnSpikeTouched += PlayerDeath;
         playerLastSavedPosition = player.transform.position;
     }
 
@@ -34,9 +34,20 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         OnColorChange?.Invoke(yingState);
     }
 
-    void PlayerMoveToSpawn() 
+    private void PlayerDeath() 
+    {
+        if (!player.Death)
+        {
+            player.Dead(true);
+
+            Invoke(nameof(PlayerMoveToSpawn), 1.5f);
+        }
+    }
+
+    private void PlayerMoveToSpawn()
     {
         player.transform.position = playerLastSavedPosition;
+        player.Dead(false);
     }
 
     public void NewPlayerSavedPosition(Vector3 newPosition) 

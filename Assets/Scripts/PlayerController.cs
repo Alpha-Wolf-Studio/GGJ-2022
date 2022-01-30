@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool firstJumpStarted = false;
 
     public Rigidbody2D Rigid => rigid;
+    public bool Death { get; set; } = false;
 
     public void ChangeInputEnable(bool state) => inputEnabled = state;
 
@@ -209,5 +210,12 @@ public class PlayerController : MonoBehaviour
         Vector2 size = currentStats.Collider2d.size;
         groundDistance = size.y / 2 + 0.05f;
         halfWidth = size.x / 2 - 0.1f;
+    }
+
+    public void Dead(bool death)
+    {
+        Death = death;
+        currentStats.Anim.SetBool("Death", death);
+        ChangeInputEnable(!death);
     }
 }
