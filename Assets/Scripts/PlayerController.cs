@@ -164,6 +164,11 @@ public class PlayerController : MonoBehaviour
         {
             rigid.AddForce(Physics2D.gravity * currentStats.FallExtraGravity);
             isFalling = true;
+
+            if (currentStats.Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle/Walk"))
+            {
+                currentStats.Anim.SetTrigger("Fall");
+            }
         }
         else
         {
