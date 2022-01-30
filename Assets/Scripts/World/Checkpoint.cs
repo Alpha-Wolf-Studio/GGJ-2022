@@ -6,6 +6,8 @@ public class Checkpoint : MonoBehaviour
 {
 
     [SerializeField] List<ParticleSystem> particleSystems;
+    [SerializeField] GameObject maskOnGameobject;
+    [SerializeField] GameObject maskOffGameobject;
 
     bool currentActivated;
 
@@ -17,6 +19,8 @@ public class Checkpoint : MonoBehaviour
         {
             item.Stop();
         }
+        maskOnGameobject.SetActive(false);
+        maskOffGameobject.SetActive(true);
     }
 
     void DeactivateCheckpoint() 
@@ -26,6 +30,8 @@ public class Checkpoint : MonoBehaviour
         {
             item.Stop();
         }
+        maskOnGameobject.SetActive(false);
+        maskOffGameobject.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +44,8 @@ public class Checkpoint : MonoBehaviour
         {
             item.Play();
         }
+        maskOnGameobject.SetActive(true);
+        maskOffGameobject.SetActive(false);
     }
 
     void InvertColor(bool yingState) 
