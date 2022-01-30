@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
+
 public class UIManager : MonoBehaviourSingleton<UIManager>
 {
     public Slider sliderVolGral;
@@ -50,6 +53,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         Time.timeScale = 1;
         StartCoroutine(SwitchPanel(transitionMenuTime, (int) Menues.Game, (int) Menues.Main));
         GameManager.Get().GetPlayer().ChangeInputEnable(true);
+        StartCoroutine(FixCameraPosition());
     }
     public void OnButtonOptions()
     {
@@ -146,5 +150,24 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     {
         menues[(int) menuActual].blocksRaycasts = false;
         menues[(int) menuActual].interactable = false;
+    }
+    private IEnumerator FixCameraPosition()
+    {
+        float onTime = 0;
+        float maxTime = 3f;
+        Vector3 startPos = new Vector3(6, 3, -10);
+        Vector3 endPos = new Vector3(0, 3, -10);
+        Transform cam = Camera.main.transform;
+
+        while (onTime < maxTime)
+        {
+            onTime += Time.deltaTime;
+            float lerp = onTime / maxTime;
+            cam.localPosition = Vector3.Lerp(startPos, endPos, lerp);
+            
+            yield return null;
+        }
+
+        cam.localPosition = endPos;
     }
 }

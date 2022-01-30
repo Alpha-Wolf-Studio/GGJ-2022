@@ -11,18 +11,32 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 startPosition = Vector3.zero;
     private int currentWaypoint = 0;
-    private float currentPosition = 0;
+    private float currentPosition = 10;
     private bool exitPlayer = false;
 
     private PlayerController player = null;
 
+    private float waitingTime = 0;
+    private float onTime = 0;
+    private bool isWaiting = true;
+
     private void Start()
     {
+        waitingTime = UnityEngine.Random.Range(0.0f, 3.0f);
         startPosition = transform.position;
     }
-
     void Update()
     {
+        if (isWaiting)
+        {
+            onTime += Time.deltaTime;
+
+            if (onTime > waitingTime)
+                isWaiting = false;
+            else
+                return;
+        }
+
         currentPosition += Time.deltaTime * speed;
         transform.position = Vector3.Lerp(startPosition, waypoints[currentWaypoint].position, currentPosition);
         if(currentPosition > 1)

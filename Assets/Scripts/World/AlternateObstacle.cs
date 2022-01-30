@@ -16,6 +16,11 @@ public class AlternateObstacle : MonoBehaviour, IObstacle
     private float onTime = 0;
     private Vector3 startSize = Vector3.one;
 
+
+    private float waitingTime;
+    private float onTimeWaiting = 0;
+    private bool isWaiting = true;
+
     private void Awake()
     {
         if (!coll) coll = GetComponent<Collider2D>();
@@ -23,11 +28,22 @@ public class AlternateObstacle : MonoBehaviour, IObstacle
     }
     private void Start()
     {
+        waitingTime = UnityEngine.Random.Range(0.0f, 3.0f);
         startSize = transform.localScale;
     }
     private void Update()
     {
         if (!updateAvailable) return;
+
+        if (isWaiting)
+        {
+            onTime += Time.deltaTime;
+
+            if (onTime > waitingTime)
+                isWaiting = false;
+            else
+                return;
+        }
 
         onTime += Time.deltaTime;
         if (isVisible)
