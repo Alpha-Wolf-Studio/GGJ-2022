@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 1000
-  jumpForce: 30
-  fallExtraGravity: 1
+  jumpForce: 35
+  fallExtraGravity: 1.5
   doubleJump: 0
   attackEnabled: 1
   interactionDistance: 1
