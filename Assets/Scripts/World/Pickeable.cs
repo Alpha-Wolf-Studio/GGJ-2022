@@ -12,12 +12,9 @@ public class Pickeable : MonoBehaviour, IObstacle
     Vector3 startPosDown;
     bool goingUp = true;
 
-    SpriteRenderer rend;
-
     [SerializeField] ParticleSystem ownParticleSystem;
     private void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
         startPosUp = new Vector3(transform.position.x, transform.position.y + movementOffset, transform.position.z);
         startPosDown = new Vector3(transform.position.x, transform.position.y - movementOffset, transform.position.z);
     }
@@ -37,7 +34,6 @@ public class Pickeable : MonoBehaviour, IObstacle
 
     public void Activate()
     {
-        rend.color = Utils.OniWhite;
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
         aliveParticles = new ParticleSystem.Particle[module.maxParticles];
@@ -52,7 +48,6 @@ public class Pickeable : MonoBehaviour, IObstacle
 
     public void Disactivate()
     {
-        rend.color = Utils.OniBlack;
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
         aliveParticles = new ParticleSystem.Particle[module.maxParticles];
