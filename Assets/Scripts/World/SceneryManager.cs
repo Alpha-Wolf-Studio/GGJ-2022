@@ -7,7 +7,6 @@ public class SceneryManager : MonoBehaviour
 {
     [SerializeField] GameObject groundBaseObject;
     SpriteRenderer[] groundRenderers;
-    [SerializeField] SpriteRenderer backgroundRenderer;
     [SerializeField] GameObject textBaseObject;
     TextMeshPro[] textMeshes;
 
@@ -29,26 +28,25 @@ public class SceneryManager : MonoBehaviour
         {
             foreach(SpriteRenderer r in groundRenderers) 
             {
-                r.color = Color.white;
+                r.color = Utils.OniWhite;
             }
             foreach (var texts in textMeshes)
             {
-                texts.color = Color.white;
+                texts.color = Utils.OniWhite;
             }
-            backgroundRenderer.color = Color.black;
+            Camera.main.backgroundColor = Utils.OniBlack;
         }
         else 
         {
             foreach (SpriteRenderer r in groundRenderers)
             {
-                r.color = Color.black;
+                r.color = Utils.OniBlack;
             }
             foreach (var texts in textMeshes)
             {
-                texts.color = Color.black;
+                texts.color = Utils.OniBlack;
             }
-            backgroundRenderer.color = Color.white;
-
+            Camera.main.backgroundColor = Utils.OniWhite;
         }
     }
 }

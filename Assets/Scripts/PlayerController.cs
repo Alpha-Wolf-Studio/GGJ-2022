@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private bool yinEnabled = true;
+    [SerializeField] private bool yinEnabled = false;
     [SerializeField] private PlayerStats yinStats = null;
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;

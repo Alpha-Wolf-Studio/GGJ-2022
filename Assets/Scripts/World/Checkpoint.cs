@@ -7,8 +7,6 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField] List<ParticleSystem> particleSystems;
 
-    //[SerializeField] ParticleSystem ownParticleSystem;
-
     bool currentActivated;
 
     private void Start()
