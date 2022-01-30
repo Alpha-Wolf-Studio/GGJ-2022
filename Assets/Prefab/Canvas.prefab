@@ -4246,7 +4246,7 @@ MonoBehaviour:
   m_MinValue: -60
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4980,7 +4980,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d11b8d20c8f76c408110d93902e4f33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd865293c12c6864abe527ee17a326c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5319,7 +5319,7 @@ MonoBehaviour:
   m_MinValue: -60
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: -30
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5437,7 +5437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dd865293c12c6864abe527ee17a326c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d11b8d20c8f76c408110d93902e4f33, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5754,14 +5754,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7fca3c313ee21e9458d7c4f876cd0fbe, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5980,32 +5980,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Federico Olive - Programming
-
-    Adrian Sgro - Programming
-
-    Mauro
-    Mendoza - Programming
-
-
-    Nicolas Jimenez Lamberti - Art
-
-    Guadalupe Ferreira
-    Le Roi - Art
-
-    Santiago Lafosse - Art
-
-
-    Guido Tello Bazano - Game Design
-
-    Francisco
-    Sanchez - Game Design
-
-    Guido Confalone - Game Design
-
-
-    Fernando Alonso
-    - Audio'
+  m_text: "Federico Olive - Programming\nAdrian Sgro - Programming\nMauro Mendoza
+    - Programming\n\nNicolas Jimenez Lamberti - Art\nGuadalupe Ferreira Le Roi -
+    Art\nSantiago Lafosse - Art\nGast\xF3n P\xE9rez Camacho - Art\n\nGuido Tello
+    Bazano - Game Design\nFrancisco Sanchez - Game Design\nGuido Confalone - Game
+    Design\n\nFernando Alonso - Audio"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 224e22e1b7b13a04e868ba313d6fafe0, type: 2}
   m_sharedMaterial: {fileID: 8014313915218305264, guid: 224e22e1b7b13a04e868ba313d6fafe0,
@@ -6033,7 +6012,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.7
+  m_fontSize: 50.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

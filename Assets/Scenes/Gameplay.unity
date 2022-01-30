@@ -334,7 +334,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 6013488484267848587, guid: da34dc4350624e24f90152d4b6f68929,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 0b06c5ed813dd754681e78e0a767b597, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -657,7 +657,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -987,6 +987,20 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725850710858474563, guid: 540955e390054b041b3be3219487d61f,
+        type: 3}
+      propertyPath: m_text
+      value: "Federico Olive - Programming\nAdrian Sgro - Programming\nMauro Mendoza
+        - Programming\n\nNicolas Jimenez Lamberti - Art\nGuadalupe Ferreira Le Roi
+        - Art\nSantiago Lafosse - Art\nGast\xF3n P\xE9rez Camacho - Art\n\nGuido
+        Tello Bazano - Game Design\nFrancisco Sanchez - Game Design\nGuido Confalone
+        - Game Design\n\nFernando Alonso - Audio"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725850710858474563, guid: 540955e390054b041b3be3219487d61f,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 540955e390054b041b3be3219487d61f, type: 3}
