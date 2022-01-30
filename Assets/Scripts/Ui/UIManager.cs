@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -24,13 +24,15 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     private float transitionMenuTime = 0.5f;
     private enum Menues { Main, Game, Options, Credits, Endgame }
     private Menues menuActual = Menues.Main;
-    
+
+    public List<TextMeshProUGUI> textsToChange = new List<TextMeshProUGUI>();
     private void Start()
     {
         Time.timeScale = 0;
         StartCoroutine(InvokeLoadSound());
         GameManager.Get().GetPlayer().ChangeInputEnable(false);
         GameManager.Get().OnGameEnded += GameEnded;
+        GameManager.Get().OnColorChange += UiColorChange;
     }
     IEnumerator InvokeLoadSound()
     {
@@ -155,8 +157,8 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     {
         float onTime = 0;
         float maxTime = 3f;
-        Vector3 startPos = new Vector3(6, 3, -10);
-        Vector3 endPos = new Vector3(0, 3, -10);
+        Vector3 startPos = new Vector3(6, 0, -10);
+        Vector3 endPos = new Vector3(0, 0, -10);
         Transform cam = Camera.main.transform;
 
         while (onTime < maxTime)
@@ -169,5 +171,12 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         }
 
         cam.localPosition = endPos;
+    }
+    private void UiColorChange(bool onColor)
+    {
+        foreach (TextMeshProUGUI texts in textsToChange)
+        {
+            texts.color = onColor ? Color.white : Color.black;
+        }
     }
 }
