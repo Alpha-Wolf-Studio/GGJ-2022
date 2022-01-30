@@ -21,7 +21,7 @@ public class Interactable : MonoBehaviour
     {
         if (interacted || !doorToOpen) return;
         if (audio) audio.Play();
-        Invoke("ReproduceSecondAudio", 1.3f);
+        Invoke("ReproduceSecondAudio", 1.1f);
         Destroy(doorToOpen);
         interacted = true;
         RotateSitck();

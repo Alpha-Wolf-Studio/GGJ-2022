@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Action onButtonEnter;
@@ -39,7 +42,8 @@ public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [Header("Other:")]
     [SerializeField] private bool enableObject;
     [SerializeField] private GameObject objectToEnable;
-
+    [SerializeField] private List<AudioClip> randomAudios = new List<AudioClip>();
+    
     private void Awake()
     {
         increment = false;
@@ -86,7 +90,14 @@ public class UiButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnMouseEnterButton()
     {
         if (hasSound)
+        {
+            if (randomAudios.Count > 0)
+            {
+                int indexAudio = Random.Range(0, randomAudios.Count);
+                audioFx.clip = randomAudios[indexAudio];
+            }
             audioFx.Play();
+        }
 
         onButtonEnter?.Invoke();
         increment = true;
