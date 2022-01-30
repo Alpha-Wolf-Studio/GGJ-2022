@@ -154,7 +154,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   waitingTime: 1
-  speed: 0.1
+  speed: 0.5
   waypoints:
   - {fileID: 1515532525563677519}
   - {fileID: 1515532524420584249}
