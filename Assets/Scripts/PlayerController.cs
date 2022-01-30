@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStats currentStats = null;
 
-    private bool isJumping = false;
+    private bool isFalling = false;
     private bool isInteracting = false;
     private bool flipped = false;
     private bool inputEnabled = true;
@@ -66,11 +66,11 @@ public class PlayerController : MonoBehaviour
         currentStats.Anim.SetFloat("Vel", Mathf.Abs(Input.GetAxis("Horizontal")));
     }
 
-    private void Jump()
+    public void Jump()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (CheckGround() || currentStats.DoubleJump && !firstJumpStarted)
+            if (!isFalling || (currentStats.DoubleJump && !firstJumpStarted))
             {
                 currentStats.Anim.SetTrigger("Jump");
 
@@ -108,7 +108,12 @@ public class PlayerController : MonoBehaviour
             }
 
             isInteracting = true;
-            currentStats.Anim.SetTrigger("Attack");
+
+            if (currentStats.AttackEnabled)
+            {
+                currentStats.Anim.SetTrigger("Attack");
+            }
+
             StartCoroutine(Attacking());
         }
     }
@@ -150,20 +155,18 @@ public class PlayerController : MonoBehaviour
         if (!CheckGround())
         {
             rigid.AddForce(Physics2D.gravity * currentStats.FallExtraGravity);
-            isJumping = true;
+            isFalling = true;
         }
         else
         {
-            if (isJumping)
+            if (isFalling)
             {
-                isJumping = false;
+                isFalling = false;
                 currentStats.Anim.SetTrigger("Land");
             }
             if (currentStats.DoubleJump)
             {
                 firstJumpStarted = false;
-                isJumping = false;
-                currentStats.Anim.SetTrigger("Land");
             }
         }
     }
@@ -193,16 +196,16 @@ public class PlayerController : MonoBehaviour
     {
         currentStats = yinEnabled ? yinStats : yangStats;
         currentStats.SpriteRend.flipX = flipped;
-        SetMeasures();
 
         yinStats.gameObject.SetActive(yinEnabled);
         yangStats.gameObject.SetActive(!yinEnabled);
+        SetMeasures();
     }
 
     private void SetMeasures()
     {
         Vector2 size = currentStats.Collider2d.size;
-        groundDistance = transform.localScale.y * size.y / 2 + 0.05f;
-        halfWidth = transform.localScale.x * size.x / 2 - 0.05f;
+        groundDistance = size.y / 2 + 0.05f;
+        halfWidth = size.x / 2 - 0.05f;
     }
 }
