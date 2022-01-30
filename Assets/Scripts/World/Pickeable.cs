@@ -13,12 +13,7 @@ public class Pickeable : MonoBehaviour, IObstacle
     bool goingUp = true;
 
     [SerializeField] ParticleSystem ownParticleSystem;
-
-    private AudioSource audio;
-    private void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
+    
     private void Start()
     {
         startPosUp = new Vector3(transform.position.x, transform.position.y + movementOffset, transform.position.z);
@@ -68,6 +63,7 @@ public class Pickeable : MonoBehaviour, IObstacle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AudioSource audio = GameObject.FindGameObjectWithTag("ExtraAudio").GetComponent<AudioSource>();
         if (audio) audio.Play();
         GameManager.Get().PlayerPickUp();
         Destroy(this.gameObject);
