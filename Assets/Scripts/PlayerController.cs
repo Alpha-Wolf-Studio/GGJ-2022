@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
                 Flip();
             }
         }
+
+        currentStats.Anim.SetFloat("Vel", Mathf.Abs(Input.GetAxis("Horizontal")));
     }
 
     private void Jump()

@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private bool attackEnabled = false;
     [SerializeField] private float interactionDistance = 0f;
     [SerializeField] private float interactionCooldown = 0f;
+    [SerializeField] private Animator animator = null;
     [SerializeField] private SpriteRenderer spriteRenderer = null;
     [SerializeField] private BoxCollider2D boxCollider2d = null;
 
@@ -19,6 +20,7 @@ public class PlayerStats : MonoBehaviour
     public float AttackCooldown => interactionCooldown;
     public bool DoubleJump => doubleJump;
     public bool AttackEnabled => attackEnabled;
+    public Animator Anim => animator;
     public SpriteRenderer SpriteRend => spriteRenderer;
     public BoxCollider2D BoxCollider2d => boxCollider2d;
 }
