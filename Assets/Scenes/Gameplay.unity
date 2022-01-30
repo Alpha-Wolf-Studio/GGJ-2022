@@ -988,20 +988,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6725850710858474563, guid: 540955e390054b041b3be3219487d61f,
-        type: 3}
-      propertyPath: m_text
-      value: "Federico Olive - Programming\nAdrian Sgro - Programming\nMauro Mendoza
-        - Programming\n\nNicolas Jimenez Lamberti - Art\nGuadalupe Ferreira Le Roi
-        - Art\nSantiago Lafosse - Art\nGast\xF3n P\xE9rez Camacho - Art\n\nGuido
-        Tello Bazano - Game Design\nFrancisco Sanchez - Game Design\nGuido Confalone
-        - Game Design\n\nFernando Alonso - Audio"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6725850710858474563, guid: 540955e390054b041b3be3219487d61f,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 50.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 540955e390054b041b3be3219487d61f, type: 3}
 --- !u!1001 &6955829181174387714
