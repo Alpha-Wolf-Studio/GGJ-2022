@@ -13,6 +13,7 @@ public class ObstaclesManager : MonoBehaviour
     [SerializeField] GameObject boxesObjectsBase;
     IObstacle[] boxesObjects;
 
+    [SerializeField] List<Spike> spikesOutsideBaseObject;
     [SerializeField] GameObject spikesObjectsBase;
     Spike[] spikes;
 
@@ -31,6 +32,10 @@ public class ObstaclesManager : MonoBehaviour
         pickeables = pickeableObjectsBase.GetComponentsInChildren<Pickeable>();
         fakeGrounds = fakeGroundObjectsBase.GetComponentsInChildren<FakeGroundObstacle>();
         foreach (var spike in spikes)
+        {
+            spike.OnTouch += SpikeTouch;
+        }
+        foreach (var spike in spikesOutsideBaseObject)
         {
             spike.OnTouch += SpikeTouch;
         }
