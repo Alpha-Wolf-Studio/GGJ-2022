@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09598191c77a2649a5e4e6b71330a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibleTime: 1
+  visibleTime: 2
   invisibleTime: 2
   spawnTime: 0.1
   updateAvailable: 1
