@@ -5,6 +5,8 @@ using TMPro;
 
 public class SceneryManager : MonoBehaviour
 {
+    [SerializeField] GameObject yingBaseSceneryObjects;
+    [SerializeField] GameObject yangBaseSceneryObjects;
     [SerializeField] GameObject groundBaseObject;
     SpriteRenderer[] groundRenderers;
     [SerializeField] GameObject textBaseObject;
@@ -26,7 +28,9 @@ public class SceneryManager : MonoBehaviour
     {
         if (yingState) 
         {
-            foreach(SpriteRenderer r in groundRenderers) 
+            yingBaseSceneryObjects.SetActive(true);
+            yangBaseSceneryObjects.SetActive(false);
+            foreach (SpriteRenderer r in groundRenderers) 
             {
                 r.color = Utils.OniWhite;
             }
@@ -38,6 +42,8 @@ public class SceneryManager : MonoBehaviour
         }
         else 
         {
+            yingBaseSceneryObjects.SetActive(false);
+            yangBaseSceneryObjects.SetActive(true);
             foreach (SpriteRenderer r in groundRenderers)
             {
                 r.color = Utils.OniBlack;
