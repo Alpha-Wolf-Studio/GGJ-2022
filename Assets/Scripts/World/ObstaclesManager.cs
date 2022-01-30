@@ -7,11 +7,8 @@ public class ObstaclesManager : MonoBehaviour
 
     public Action OnSpikeTouched;
 
-    [SerializeField] GameObject yingObjectsBase;
-    IObstacle[] yingObjects;
-
-    [SerializeField] GameObject yangObjectsBase;
-    IObstacle[] yangObjects;
+    [SerializeField] GameObject generalObjectsBase;
+    IObstacle[] generalObjects;
 
     [SerializeField] GameObject boxesObjectsBase;
     IObstacle[] boxesObjects;
@@ -28,8 +25,7 @@ public class ObstaclesManager : MonoBehaviour
     private void Start()
     {
         GameManager.Get().OnColorChange += ChangeState;
-        yingObjects = yingObjectsBase.GetComponentsInChildren<IObstacle>();
-        yangObjects = yangObjectsBase.GetComponentsInChildren<IObstacle>();
+        generalObjects = generalObjectsBase.GetComponentsInChildren<IObstacle>();
         boxesObjects = boxesObjectsBase.GetComponentsInChildren<IObstacle>();
         spikes = spikesObjectsBase.GetComponentsInChildren<Spike>();
         pickeables = pickeableObjectsBase.GetComponentsInChildren<Pickeable>();
@@ -44,15 +40,11 @@ public class ObstaclesManager : MonoBehaviour
     {
         if (yingState) 
         {
-            foreach (IObstacle o in yangObjects)
-            {
-                o.Disactivate();
-            }
             foreach (IObstacle o in boxesObjects)
             {
                 o.Activate();
             }
-            foreach (IObstacle o in yingObjects) 
+            foreach (IObstacle o in generalObjects) 
             {
                 o.Activate();
             }
@@ -71,11 +63,7 @@ public class ObstaclesManager : MonoBehaviour
         }
         else 
         {
-            foreach (IObstacle o in yangObjects)
-            {
-                o.Activate();
-            }
-            foreach (IObstacle o in yingObjects)
+            foreach (IObstacle o in generalObjects)
             {
                 o.Disactivate();
             }
