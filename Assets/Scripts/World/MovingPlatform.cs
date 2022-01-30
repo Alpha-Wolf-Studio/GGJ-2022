@@ -6,6 +6,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private LayerMask movableMask = default;
+    [SerializeField] private float waitingTime = 1f;
     [SerializeField] private float speed = .25f;
     [SerializeField] private List<Transform> waypoints;
 
@@ -16,23 +17,39 @@ public class MovingPlatform : MonoBehaviour
 
     private PlayerController player = null;
 
-    private float waitingTime = 0;
+    private float firstWaitingTime = 0;
+    private bool firstTimeWaiting = true;
+    private bool waiting = false;
     private float onTime = 0;
-    private bool isWaiting = true;
 
     private void Start()
     {
-        waitingTime = UnityEngine.Random.Range(0.0f, 3.0f);
+        firstWaitingTime = UnityEngine.Random.Range(1.0f, 3.0f);
         startPosition = transform.position;
     }
     void Update()
     {
-        if (isWaiting)
+        if (firstTimeWaiting)
+        {
+            onTime += Time.deltaTime;
+
+            if (onTime > firstWaitingTime) 
+            {
+                firstTimeWaiting = false;
+                onTime = 0;
+            }
+            else
+                return;
+        }
+        else if (waiting) 
         {
             onTime += Time.deltaTime;
 
             if (onTime > waitingTime)
-                isWaiting = false;
+            {
+                waiting = false;
+                onTime = 0;
+            }
             else
                 return;
         }
@@ -44,6 +61,7 @@ public class MovingPlatform : MonoBehaviour
             startPosition = transform.position;
             currentPosition = 0;
             currentWaypoint++;
+            waiting = true;
             if (currentWaypoint > waypoints.Count - 1) currentWaypoint = 0;
         }
     }
