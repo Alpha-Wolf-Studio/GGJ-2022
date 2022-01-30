@@ -9,17 +9,25 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float speed = .25f;
     [SerializeField] private List<Transform> waypoints;
 
+    private Vector3 startPosition = Vector3.zero;
     private int currentWaypoint = 0;
     private float currentPosition = 0;
+    private bool exitPlayer = false;
 
     private PlayerController player = null;
+
+    private void Start()
+    {
+        startPosition = transform.position;
+    }
 
     void Update()
     {
         currentPosition += Time.deltaTime * speed;
-        transform.position = Vector3.Lerp(transform.position, waypoints[currentWaypoint].position, currentPosition);
-        if(currentPosition > 1) 
+        transform.position = Vector3.Lerp(startPosition, waypoints[currentWaypoint].position, currentPosition);
+        if(currentPosition > 1)
         {
+            startPosition = transform.position;
             currentPosition = 0;
             currentWaypoint++;
             if (currentWaypoint > waypoints.Count - 1) currentWaypoint = 0;
@@ -32,6 +40,7 @@ public class MovingPlatform : MonoBehaviour
         {
             player = other.transform.parent.gameObject.GetComponent<PlayerController>();
             player.transform.SetParent(transform);
+            exitPlayer = false;
         }
     }
 
@@ -50,8 +59,19 @@ public class MovingPlatform : MonoBehaviour
     {
         if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
         {
+            if (player != null)
+            {
+                Invoke(nameof(ExitPlayerParent), 0.05f);
+                exitPlayer = true;
+            }
+        }
+    }
+
+    private void ExitPlayerParent()
+    {
+        if (exitPlayer)
+        {
             player.transform.SetParent(null);
-            player = null;
         }
     }
 }
