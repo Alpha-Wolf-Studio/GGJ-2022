@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float interactionCooldown = 0f;
     [SerializeField] private Animator animator = null;
     [SerializeField] private SpriteRenderer spriteRenderer = null;
-    [SerializeField] private BoxCollider2D boxCollider2d = null;
+    [SerializeField] private CapsuleCollider2D collider2d = null;
 
     public float MoveForce => moveForce;
     public float JumpForce => jumpForce;
@@ -22,5 +22,5 @@ public class PlayerStats : MonoBehaviour
     public bool AttackEnabled => attackEnabled;
     public Animator Anim => animator;
     public SpriteRenderer SpriteRend => spriteRenderer;
-    public BoxCollider2D BoxCollider2d => boxCollider2d;
+    public CapsuleCollider2D Collider2d => collider2d;
 }

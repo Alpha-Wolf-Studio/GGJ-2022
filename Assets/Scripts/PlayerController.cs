@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (!Physics2D.BoxCast(transform.position, currentStats.BoxCollider2d.size, 0f, Vector2.zero, 0f, defaultMask))
+            if (!Physics2D.BoxCast(transform.position, currentStats.Collider2d.size, 0f, Vector2.zero, 0f, defaultMask))
             {
                 yinEnabled = !yinEnabled;
                 GameManager.Get().InvertColor();
@@ -186,8 +186,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetMeasures()
     {
-        Vector2 size = currentStats.BoxCollider2d.size;
-        groundDistance = transform.localScale.y * size.y / 2 + 0.075f;
+        Vector2 size = currentStats.Collider2d.size;
+        groundDistance = transform.localScale.y * size.y / 2 + 0.05f;
         halfWidth = transform.localScale.x * size.x / 2;
     }
 }
