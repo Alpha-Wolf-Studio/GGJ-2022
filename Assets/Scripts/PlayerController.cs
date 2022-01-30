@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStats currentStats = null;
 
+    private bool isJumping = false;
     private bool isInteracting = false;
     private bool flipped = false;
     private bool inputEnabled = true;
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             if (CheckGround() || currentStats.DoubleJump && !firstJumpStarted)
             {
-                rigid.AddForce(Vector3.up * currentStats.JumpForce, ForceMode2D.Impulse);
+                currentStats.Anim.SetTrigger("Jump");
 
                 if (currentStats.DoubleJump)
                 {
@@ -79,6 +80,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void JumpForce()
+    {
+        rigid.AddForce(Vector3.up * currentStats.JumpForce, ForceMode2D.Impulse);
     }
 
     private void Attack()
@@ -92,7 +98,7 @@ public class PlayerController : MonoBehaviour
             {
                 float timer = 0f;
                 Interact(currentStats.AttackEnabled);
-                while (timer < currentStats.AttackCooldown)
+                while (timer < currentStats.IteractionCooldown)
                 {
                     timer += Time.deltaTime;
                     yield return new WaitForEndOfFrame();
@@ -102,6 +108,7 @@ public class PlayerController : MonoBehaviour
             }
 
             isInteracting = true;
+            currentStats.Anim.SetTrigger("Attack");
             StartCoroutine(Attacking());
         }
     }
@@ -143,12 +150,20 @@ public class PlayerController : MonoBehaviour
         if (!CheckGround())
         {
             rigid.AddForce(Physics2D.gravity * currentStats.FallExtraGravity);
+            isJumping = true;
         }
         else
         {
+            if (isJumping)
+            {
+                isJumping = false;
+                currentStats.Anim.SetTrigger("Land");
+            }
             if (currentStats.DoubleJump)
             {
                 firstJumpStarted = false;
+                isJumping = false;
+                currentStats.Anim.SetTrigger("Land");
             }
         }
     }

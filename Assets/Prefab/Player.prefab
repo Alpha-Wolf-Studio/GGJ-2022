@@ -201,10 +201,24 @@ MonoBehaviour:
   doubleJump: 0
   attackEnabled: 1
   interactionDistance: 1
-  interactionCooldown: 0.1
+  interactionCooldown: 0.25
   animator: {fileID: 611468708721992159}
   spriteRenderer: {fileID: 4516755164401005048}
   collider2d: {fileID: 1513080365036722946}
+  event1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6955829181309680233}
+        m_MethodName: JumpForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &611468708721992159
 Animator:
   serializedVersion: 3
@@ -346,6 +360,20 @@ MonoBehaviour:
   animator: {fileID: 8671368865264786411}
   spriteRenderer: {fileID: 4497656322598150779}
   collider2d: {fileID: 6993141531968032522}
+  event1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6955829181309680233}
+        m_MethodName: JumpForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &8671368865264786411
 Animator:
   serializedVersion: 3
