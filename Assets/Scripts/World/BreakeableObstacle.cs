@@ -7,6 +7,9 @@ public class BreakeableObstacle : MonoBehaviour
 {
     private bool broken = false;
 
+    [SerializeField] List<GameObject> healthyGameObjects;
+    [SerializeField] List<GameObject> brokenGameObjects;
+
     private BoxCollider2D boxCollider = null;
     private Animator animator = null;
 
@@ -22,14 +25,14 @@ public class BreakeableObstacle : MonoBehaviour
             return;
 
         broken = true;
-        boxCollider.isTrigger = true;
-        //animacion de romper
-        //destruir gameobject o solo desactivarlo?
-        DestroyGO();
-    }
-
-    public void DestroyGO()
-    {
-        Destroy(gameObject);
+        boxCollider.enabled = false;
+        for (int i = 0; i < healthyGameObjects.Count; i++)
+        {
+            healthyGameObjects[i].SetActive(false);
+        }
+        for (int i = 0; i < brokenGameObjects.Count; i++)
+        {
+            brokenGameObjects[i].SetActive(true);
+        }
     }
 }
