@@ -5,7 +5,9 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
 
-    [SerializeField] ParticleSystem ownParticleSystem;
+    [SerializeField] List<ParticleSystem> particleSystems;
+
+    //[SerializeField] ParticleSystem ownParticleSystem;
 
     bool currentActivated;
 
@@ -13,13 +15,19 @@ public class Checkpoint : MonoBehaviour
     {
         GameManager.Get().OnNewCheckpoint += DeactivateCheckpoint;
         GameManager.Get().OnColorChange += InvertColor;
-        ownParticleSystem.Stop();
+        foreach (var item in particleSystems)
+        {
+            item.Stop();
+        }
     }
 
     void DeactivateCheckpoint() 
     {
         currentActivated = false;
-        ownParticleSystem.Stop();
+        foreach (var item in particleSystems)
+        {
+            item.Stop();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,33 +36,39 @@ public class Checkpoint : MonoBehaviour
 
         GameManager.Get().NewPlayerSavedPosition(transform.position);
         currentActivated = true;
-        ownParticleSystem.Play();
+        foreach (var item in particleSystems)
+        {
+            item.Play();
+        }
     }
 
     void InvertColor(bool yingState) 
     {
-        var module = ownParticleSystem.main;
-        ParticleSystem.Particle[] aliveParticles;
-        aliveParticles = new ParticleSystem.Particle[module.maxParticles];
-        int numberOfAliveParticles = ownParticleSystem.GetParticles(aliveParticles);
-        if (yingState) 
+        foreach (var item in particleSystems)
         {
-            module.startColor = Utils.OniWhite;
-            for (int i = 0; i < numberOfAliveParticles; i++)
+            var module = item.main;
+            ParticleSystem.Particle[] aliveParticles;
+            aliveParticles = new ParticleSystem.Particle[module.maxParticles];
+            int numberOfAliveParticles = item.GetParticles(aliveParticles);
+            if (yingState)
             {
-                aliveParticles[i].startColor = Utils.OniWhite;
+                module.startColor = Utils.OniWhite;
+                for (int i = 0; i < numberOfAliveParticles; i++)
+                {
+                    aliveParticles[i].startColor = Utils.OniWhite;
+                }
             }
-        }
-        else 
-        {
-            
-            module.startColor = Utils.OniBlack;
-            for (int i = 0; i < numberOfAliveParticles; i++)
+            else
             {
-                aliveParticles[i].startColor = Utils.OniBlack;
+
+                module.startColor = Utils.OniBlack;
+                for (int i = 0; i < numberOfAliveParticles; i++)
+                {
+                    aliveParticles[i].startColor = Utils.OniBlack;
+                }
             }
+            item.SetParticles(aliveParticles, numberOfAliveParticles);
         }
-        ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);
     }
 
 }

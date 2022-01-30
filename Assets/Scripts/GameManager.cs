@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public Action<bool> OnColorChange;
     
     int currentPickeableAmount = 0;
+    public int GetCurrentPickeablesAmount() => currentPickeableAmount;
     public Action<int> OnCurrencyChange;
 
     private void Start()
@@ -48,4 +49,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         currentPickeableAmount++;
         OnCurrencyChange?.Invoke(currentPickeableAmount);
     }
+
+    public void EndGame() 
+    {
+
+    }
+
 }
