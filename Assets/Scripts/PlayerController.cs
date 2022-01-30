@@ -188,6 +188,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 size = currentStats.Collider2d.size;
         groundDistance = transform.localScale.y * size.y / 2 + 0.05f;
-        halfWidth = transform.localScale.x * size.x / 2;
+        halfWidth = transform.localScale.x * size.x / 2 - 0.05f;
     }
 }
