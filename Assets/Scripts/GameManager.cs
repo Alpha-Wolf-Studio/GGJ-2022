@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     [SerializeField] PlayerController player;
     [SerializeField] ObstaclesManager obstaclesManager;
-
+    
     Vector3 playerLastSavedPosition;
     public Action OnNewCheckpoint;
 
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     int currentPickeableAmount = 0;
     public int GetCurrentPickeablesAmount() => currentPickeableAmount;
     public Action<int> OnCurrencyChange;
+    public Action OnGameEnded;
 
     private void Start()
     {
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void EndGame() 
     {
-
+        OnGameEnded?.Invoke();
     }
 
 }

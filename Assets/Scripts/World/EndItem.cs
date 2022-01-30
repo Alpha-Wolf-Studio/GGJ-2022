@@ -5,7 +5,8 @@ using UnityEngine;
 public class EndItem : MonoBehaviour
 {
 
-    [SerializeField] List<GameObject> currencyGameObjects;
+    [SerializeField] List<GameObject> currencyActiveGameObjects;
+    [SerializeField] List<GameObject> currencyInActiveGameObjects;
     [SerializeField] int currencyToEndGame = 5;
     int currentCurrencyRetrieved = 0;
 
@@ -15,11 +16,12 @@ public class EndItem : MonoBehaviour
         if (newAmount != currentCurrencyRetrieved) 
         {
             currentCurrencyRetrieved = newAmount;
-            if(currencyGameObjects.Count >= currentCurrencyRetrieved) 
+            if(currencyActiveGameObjects.Count >= currentCurrencyRetrieved) 
             {
                 for (int i = 0; i < currentCurrencyRetrieved; i++)
                 {
-                    currencyGameObjects[currentCurrencyRetrieved].SetActive(true);
+                    currencyActiveGameObjects[i].SetActive(true);
+                    currencyInActiveGameObjects[i].SetActive(false);
                 }
             }
             if(currentCurrencyRetrieved >= currencyToEndGame) 

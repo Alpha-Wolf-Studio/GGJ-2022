@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public AudioMixer audioMixer;
 
     private float transitionMenuTime = 0.5f;
-    private enum Menues { Main, Game, Options, Credits }
+    private enum Menues { Main, Game, Options, Credits, Endgame }
     private Menues menuActual = Menues.Main;
     
     private void Start()
@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         Time.timeScale = 0;
         StartCoroutine(InvokeLoadSound());
         GameManager.Get().GetPlayer().ChangeInputEnable(false);
+        GameManager.Get().OnGameEnded += GameEnded;
     }
     IEnumerator InvokeLoadSound()
     {
@@ -87,6 +88,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     {
         StartCoroutine(SwitchPanel(transitionMenuTime, (int)Menues.Main, (int)Menues.Credits));
     }
+
     public void OnButtonToMainMenu()
     {
         SceneManager.LoadScene(0);
@@ -94,6 +96,11 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public void OnButtonSwitchYingYang()
     {
         GameManager.Get().GetPlayer().Switch();
+    }
+    void GameEnded() 
+    {
+        Time.timeScale = 0;
+        StartCoroutine(SwitchPanel(transitionMenuTime, (int)Menues.Endgame, (int)Menues.Game));
     }
     public void ChangeVolGral(float value)
     {
