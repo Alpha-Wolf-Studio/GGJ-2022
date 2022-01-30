@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,15 +11,28 @@ public class Interactable : MonoBehaviour
     [SerializeField] GameObject doorToOpen;
 
     bool interacted = false;
-
+    private AudioSource audio;
+    public AudioClip audio02;
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
     public void Interact() 
     {
         if (interacted || !doorToOpen) return;
+        if (audio) audio.Play();
+        Invoke("ReproduceSecondAudio", 1.3f);
         Destroy(doorToOpen);
         interacted = true;
         RotateSitck();
     }
+    private void ReproduceSecondAudio()
+    {
+        if (!audio || !audio02) return;
 
+        audio.clip = audio02;
+        audio.Play();
+    }
     private void RotateSitck()
     {
         IEnumerator RotateDelay()
