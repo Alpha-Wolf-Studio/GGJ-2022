@@ -26,8 +26,20 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     private Menues menuActual = Menues.Main;
 
     public List<TextMeshProUGUI> textsToChange = new List<TextMeshProUGUI>();
+
+    public Image buttonTransfotm;
+    public Sprite spriteTransformYin;
+    public Sprite spriteTransformYang;
+    public List<GameObject> objectToDisableWebGL = new List<GameObject>();
     private void Start()
     {
+        if (!Application.isMobilePlatform)
+        {
+            foreach (GameObject go in objectToDisableWebGL)
+            {
+                go.SetActive(false);
+            }
+        }
         Time.timeScale = 0;
         StartCoroutine(InvokeLoadSound());
         GameManager.Get().GetPlayer().ChangeInputEnable(false);
@@ -178,5 +190,11 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         {
             texts.color = onColor ? Color.white : Color.black;
         }
+
+        buttonTransfotm.sprite = onColor ? spriteTransformYang : spriteTransformYin;
+    }
+    public void OnButtonJump()
+    {
+        GameManager.Get().GetPlayer().Jump();
     }
 }
