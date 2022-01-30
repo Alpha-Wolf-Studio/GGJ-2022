@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool yinEnabled = false;
+    [SerializeField] private float switchCooldown = 0f;
     [SerializeField] private PlayerStats yinStats = null;
     [SerializeField] private PlayerStats yangStats = null;
     [SerializeField] private Rigidbody2D rigid = null;
@@ -11,8 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactMask = default;
     [SerializeField] private LayerMask defaultMask = default;
 
+    [Header("Audio"), Space]
+    [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private AudioClip switchYin = null;
+    [SerializeField] private AudioClip switchYang = null;
+
     private PlayerStats currentStats = null;
 
+    private bool switchEnabled = true;
     private bool isFalling = false;
     private bool isInteracting = false;
     private bool flipped = false;
@@ -174,8 +181,6 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckGround()
     {
-        Debug.DrawLine(currentStats.transform.position - new Vector3(halfWidth, 0f, 0f), currentStats.transform.position - new Vector3(halfWidth, groundDistance, 0f), Color.red);
-        Debug.DrawLine(currentStats.transform.position + new Vector3(halfWidth, 0f, 0f), currentStats.transform.position + new Vector3(halfWidth, -groundDistance, 0f), Color.red);
         return (Physics2D.Raycast(currentStats.transform.position - new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
                     jumpeableMask) ||
                 Physics2D.Raycast(currentStats.transform.position + new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
@@ -186,14 +191,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (!Physics2D.BoxCast(transform.position, currentStats.Collider2d.size, 0f, Vector2.zero, 0f, defaultMask))
+            if (!Physics2D.BoxCast(transform.position, currentStats.Collider2d.size, 0f, Vector2.zero, 0f, defaultMask) && switchEnabled)
             {
+                switchEnabled = false;
+                Invoke(nameof(SwitchEnabled), switchCooldown);
+
                 yinEnabled = !yinEnabled;
                 GameManager.Get().InvertColor();
                 SetStats();
+
+                audioSource.clip = yinEnabled ? switchYang : switchYin;
+                audioSource.Play();
             }
         }
     }
+
+    private void SwitchEnabled() => switchEnabled = true;
 
     private void SetStats()
     {
@@ -202,6 +215,7 @@ public class PlayerController : MonoBehaviour
 
         yinStats.gameObject.SetActive(yinEnabled);
         yangStats.gameObject.SetActive(!yinEnabled);
+
         SetMeasures();
     }
 
