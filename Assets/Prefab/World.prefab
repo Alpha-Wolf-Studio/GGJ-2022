@@ -2856,7 +2856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: At last, Kazuya can be freed and Yoshiro banished.
+  m_text: This is the temple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 224e22e1b7b13a04e868ba313d6fafe0, type: 2}
   m_sharedMaterial: {fileID: 8014313915218305264, guid: 224e22e1b7b13a04e868ba313d6fafe0,
@@ -5786,7 +5786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 547.65, y: 35.4}
+  m_AnchoredPosition: {x: 518.72, y: 17.11}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5969933522791323145
@@ -5883,8 +5883,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11781,7 +11781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702025749, guid: a717f4bacae03614591be2ef04af4b52, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1692570426930189325, guid: a717f4bacae03614591be2ef04af4b52,
         type: 3}
