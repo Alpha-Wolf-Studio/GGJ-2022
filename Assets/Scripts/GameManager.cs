@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void Start()
     {
-        obstaclesManager.OnSpikeTouched += PlayerDeath;
+        player.OnSpikeTouch+= PlayerDeath;
         playerLastSavedPosition = player.transform.position;
     }
 

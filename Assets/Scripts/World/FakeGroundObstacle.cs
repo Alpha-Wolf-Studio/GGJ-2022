@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FakeGroundObstacle : MonoBehaviour, IObstacle
+public class FakeGroundObstacle : Obstacle
 {
     SpriteRenderer rend;
 
@@ -11,12 +11,12 @@ public class FakeGroundObstacle : MonoBehaviour, IObstacle
         rend = GetComponent<SpriteRenderer>();
     }
 
-    public void Activate()
+    public override void Activate()
     {
         rend.color = Utils.OniWhite;
     }
 
-    public void Disactivate()
+    public override void Disactivate()
     {
         rend.color = Utils.OniBlack;
     }

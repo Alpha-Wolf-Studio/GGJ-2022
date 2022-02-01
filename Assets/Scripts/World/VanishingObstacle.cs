@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VanishingObstacle : MonoBehaviour, IObstacle
+public class VanishingObstacle : Obstacle
 {
 
     SpriteRenderer rend;
@@ -14,13 +14,13 @@ public class VanishingObstacle : MonoBehaviour, IObstacle
         col = GetComponent<Collider2D>();
     }
 
-    public void Activate() 
+    public override void Activate() 
     {
         if(rend) rend.enabled = true;
         if(col) col.isTrigger = false;
     }
 
-    public void Disactivate()
+    public override void Disactivate()
     {
         if (rend) rend.enabled = false;
         if (col) col.isTrigger = true;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PusheableObstacle : MonoBehaviour, IObstacle
+public class PusheableObstacle : Obstacle
 {
     Rigidbody2D rb;
     private void Awake()
@@ -10,7 +10,7 @@ public class PusheableObstacle : MonoBehaviour, IObstacle
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Activate()
+    public override void Activate()
     {
         if (rb)
         {
@@ -20,7 +20,7 @@ public class PusheableObstacle : MonoBehaviour, IObstacle
         }
     }
 
-    public void Disactivate()
+    public override void Disactivate()
     {
         rb.velocity = Vector2.zero;
         rb.angularVelocity = .0f;

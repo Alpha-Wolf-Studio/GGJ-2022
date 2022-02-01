@@ -1,99 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class ObstaclesManager : MonoBehaviour
 {
-
     public Action OnSpikeTouched;
 
-    [SerializeField] GameObject generalObjectsBase;
-    IObstacle[] generalObjects;
-
-    [SerializeField] GameObject boxesObjectsBase;
-    IObstacle[] boxesObjects;
-
-    [SerializeField] List<Spike> spikesOutsideBaseObject;
-    [SerializeField] GameObject spikesObjectsBase;
-    Spike[] spikes;
-
-    [SerializeField] GameObject pickeableObjectsBase;
-    Pickeable[] pickeables;
-
-    [SerializeField] GameObject fakeGroundObjectsBase;
-    FakeGroundObstacle[] fakeGrounds;
+    [SerializeField] GameObject obstacleObjectsBase;
+    Obstacle[] obstacleObjects;
 
     private void Start()
     {
         GameManager.Get().OnColorChange += ChangeState;
-        generalObjects = generalObjectsBase.GetComponentsInChildren<IObstacle>();
-        boxesObjects = boxesObjectsBase.GetComponentsInChildren<IObstacle>();
-        spikes = spikesObjectsBase.GetComponentsInChildren<Spike>();
-        pickeables = pickeableObjectsBase.GetComponentsInChildren<Pickeable>();
-        fakeGrounds = fakeGroundObjectsBase.GetComponentsInChildren<FakeGroundObstacle>();
-        foreach (var spike in spikes)
-        {
-            spike.OnTouch += SpikeTouch;
-        }
-        foreach (var spike in spikesOutsideBaseObject)
-        {
-            spike.OnTouch += SpikeTouch;
-        }
+        obstacleObjects = FindObjectsOfType<Obstacle>();
     }
-
     void ChangeState(bool yingState) 
     {
         if (yingState) 
         {
-            foreach (IObstacle o in boxesObjects)
+            foreach (Obstacle o in obstacleObjects)
             {
-                o.Activate();
-            }
-            foreach (IObstacle o in generalObjects) 
-            {
-                o.Activate();
-            }
-            foreach (var spike in spikes)
-            {
-                spike.Activate();
-            }
-            foreach (var pickeable in pickeables)
-            {
-                if(pickeable != null) pickeable.Activate();
-            }
-            foreach (var fakeGround in fakeGrounds)
-            {
-                if (fakeGround != null) fakeGround.Activate();
+                if (o)
+                    o.Activate();
             }
         }
         else 
         {
-            foreach (IObstacle o in generalObjects)
+            foreach (Obstacle o in obstacleObjects)
             {
-                o.Disactivate();
-            }
-            foreach (IObstacle o in boxesObjects)
-            {
-                o.Disactivate();
-            }
-            foreach (var spike in spikes)
-            {
-                spike.Disactivate();
-            }
-            foreach (var pickeable in pickeables)
-            {
-                if (pickeable != null) pickeable.Disactivate();
-            }
-            foreach (var fakeGround in fakeGrounds)
-            {
-                if (fakeGround != null) fakeGround.Disactivate();
+                if (o)
+                    o.Disactivate();
             }
         }
     }
-
-    void SpikeTouch() 
-    {
-        OnSpikeTouched?.Invoke();
-    }
-
 }

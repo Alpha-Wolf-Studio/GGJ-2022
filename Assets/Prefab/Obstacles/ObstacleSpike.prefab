@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6219272467959175565}
   - component: {fileID: 6219272467959175562}
   - component: {fileID: 2759922996400015108}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ObstacleSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

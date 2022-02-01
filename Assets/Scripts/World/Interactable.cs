@@ -11,27 +11,27 @@ public class Interactable : MonoBehaviour
     [SerializeField] GameObject doorToOpen;
 
     bool interacted = false;
-    private AudioSource audio;
+    private AudioSource audioSource;
     public AudioClip audio02;
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
     public void Interact() 
     {
         if (interacted || !doorToOpen) return;
-        if (audio) audio.Play();
-        Invoke("ReproduceSecondAudio", 1.1f);
+        if (audioSource) audioSource.Play();
+        Invoke(nameof(ReproduceSecondAudio), 1.1f);
         Destroy(doorToOpen);
         interacted = true;
         RotateSitck();
     }
     private void ReproduceSecondAudio()
     {
-        if (!audio || !audio02) return;
+        if (!audioSource || !audio02) return;
 
-        audio.clip = audio02;
-        audio.Play();
+        audioSource.clip = audio02;
+        audioSource.Play();
     }
     private void RotateSitck()
     {

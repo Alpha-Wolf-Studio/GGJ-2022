@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class HammerObstacle : MonoBehaviour, IObstacle
+public class HammerObstacle : Obstacle
 {
     private float speed = 50;
     private float limit = 0.7f;
@@ -32,11 +32,11 @@ public class HammerObstacle : MonoBehaviour, IObstacle
         else if (transform.rotation.z > limit && rb.angularVelocity < 0 && rb.angularVelocity > -speed)
             rb.angularVelocity = -speed;
     }
-    public void Activate()
+    public override void Activate()
     {
 
     }
-    public void Disactivate()
+    public override void Disactivate()
     {
 
     }

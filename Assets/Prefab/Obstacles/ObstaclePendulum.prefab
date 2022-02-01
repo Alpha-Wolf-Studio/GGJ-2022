@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6435574694177179995}
   - component: {fileID: 6435574694177179989}
   - component: {fileID: 6435574694177179994}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pendulum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.006823031, y: 0.7806732}
-  m_ConnectedAnchor: {x: 229.25471, y: 22.35752}
+  m_ConnectedAnchor: {x: 231.54472, y: 20.40752}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

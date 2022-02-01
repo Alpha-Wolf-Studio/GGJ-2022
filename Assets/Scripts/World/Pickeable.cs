@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Pickeable : MonoBehaviour, IObstacle
+﻿using UnityEngine;
+public class Pickeable : Obstacle
 {
 
     [SerializeField] float speed = .2f;
@@ -16,8 +13,9 @@ public class Pickeable : MonoBehaviour, IObstacle
     
     private void Start()
     {
-        startPosUp = new Vector3(transform.position.x, transform.position.y + movementOffset, transform.position.z);
-        startPosDown = new Vector3(transform.position.x, transform.position.y - movementOffset, transform.position.z);
+        Vector3 pos = transform.position;
+        startPosUp = new Vector3(pos.x, pos.y + movementOffset, pos.z);
+        startPosDown = new Vector3(pos.x, pos.y - movementOffset, pos.z);
     }
     private void Update()
     {
@@ -32,8 +30,7 @@ public class Pickeable : MonoBehaviour, IObstacle
             if (Vector3.Distance(transform.position, startPosDown) < 0.05) goingUp = true;
         }
     }
-
-    public void Activate()
+    public override void Activate()
     {
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
@@ -46,8 +43,7 @@ public class Pickeable : MonoBehaviour, IObstacle
         }
         ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);
     }
-
-    public void Disactivate()
+    public override void Disactivate()
     {
         var module = ownParticleSystem.main;
         ParticleSystem.Particle[] aliveParticles;
@@ -60,13 +56,11 @@ public class Pickeable : MonoBehaviour, IObstacle
         }
         ownParticleSystem.SetParticles(aliveParticles, numberOfAliveParticles);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        AudioSource audio = GameObject.FindGameObjectWithTag("ExtraAudio").GetComponent<AudioSource>();
-        if (audio) audio.Play();
+        AudioSource audioSource = GameObject.FindGameObjectWithTag("ExtraAudio").GetComponent<AudioSource>();
+        if (audioSource) audioSource.Play();
         GameManager.Get().PlayerPickUp();
         Destroy(this.gameObject);
     }
-
 }

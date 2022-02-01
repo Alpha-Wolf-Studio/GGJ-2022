@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class ChangingPlatform : MonoBehaviour, IObstacle
+public class ChangingPlatform : Obstacle
 {
 
     [SerializeField] GameObject YingGameobject;
     [SerializeField] GameObject YangGameobject;
 
-    public void Activate()
+    public override void Activate()
     {
         YingGameobject.SetActive(true);
         YangGameobject.SetActive(false);
     }
 
-    public void Disactivate()
+    public override void Disactivate()
     {
         YingGameobject.SetActive(false);
         YangGameobject.SetActive(true);

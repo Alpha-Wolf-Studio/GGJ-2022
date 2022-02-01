@@ -1,17 +1,13 @@
 ﻿using System;
 using UnityEngine;
-public class Spike : MonoBehaviour, IObstacle
+public class Spike : Obstacle
 {
-    public Action OnTouch;
-    
-    public void Activate()
+    public override void Activate()
     {
+        
     }
-    public void Disactivate()
+    public override void Disactivate()
     {
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnTouch?.Invoke();
+
     }
 }

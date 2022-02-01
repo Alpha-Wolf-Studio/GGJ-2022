@@ -11,16 +11,14 @@ public class BreakeableObstacle : MonoBehaviour
     [SerializeField] List<GameObject> brokenGameObjects;
 
     private BoxCollider2D boxCollider = null;
-    private Animator animator = null;
-    private AudioSource audio;
+    private AudioSource audioSource;
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        //animator = GetComponent<Animator>();
     }
 
     public void Break()
@@ -28,7 +26,7 @@ public class BreakeableObstacle : MonoBehaviour
         if (broken)
             return;
 
-        if (audio) audio.Play();
+        if (audioSource) audioSource.Play();
         broken = true;
         boxCollider.enabled = false;
         for (int i = 0; i < healthyGameObjects.Count; i++)

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
+    public Action OnSpikeTouch;
     [SerializeField] private bool yinEnabled = false;
     [SerializeField] private float switchCooldown = 0f;
     [SerializeField] private PlayerStats yinStats = null;
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         SetStats();
     }
-
     private void Update()
     {
         if (!inputEnabled)
@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
         Attack();
         ExtraGravity();
     }
-
     private void Move()
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -73,7 +72,6 @@ public class PlayerController : MonoBehaviour
 
         currentStats.Anim.SetFloat("Vel", Mathf.Abs(Input.GetAxis("Horizontal")));
     }
-
     public void Jump()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -89,12 +87,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     public void JumpForce()
     {
         rigid.AddForce(Vector3.up * currentStats.JumpForce, ForceMode2D.Impulse);
     }
-
     private void Attack()
     {
         if (isInteracting)
@@ -125,7 +121,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Attacking());
         }
     }
-
     private void Interact(bool yingState)
     {
         Vector3 dir = flipped ? Vector3.left : Vector3.right;
@@ -151,13 +146,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void Flip()
     {
         flipped = !flipped;
         currentStats.SpriteRend.flipX = flipped;
     }
-
     private void ExtraGravity()
     {
         if (!CheckGround())
@@ -183,7 +176,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private bool CheckGround()
     {
         return (Physics2D.Raycast(currentStats.transform.position - new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
@@ -191,7 +183,6 @@ public class PlayerController : MonoBehaviour
                 Physics2D.Raycast(currentStats.transform.position + new Vector3(halfWidth, 0f, 0f), Vector2.down, groundDistance,
                     jumpeableMask));
     }
-
     public void Switch()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -210,7 +201,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void SwitchEnabled() => switchEnabled = true;
 
     private void SetStats()
@@ -223,18 +213,23 @@ public class PlayerController : MonoBehaviour
 
         SetMeasures();
     }
-
     private void SetMeasures()
     {
         Vector2 size = currentStats.Collider2d.size;
         groundDistance = size.y / 2 + 0.05f;
         halfWidth = size.x / 2 - 0.1f;
     }
-
     public void Dead(bool death)
     {
         Death = death;
         currentStats.Anim.SetBool("Death", death);
         ChangeInputEnable(!death);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (Utils.Get().CheckLayerInSpike(other.gameObject.layer))
+        {
+            OnSpikeTouch?.Invoke();
+        }
     }
 }

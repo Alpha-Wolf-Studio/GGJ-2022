@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] private LayerMask movableMask = default;
     [SerializeField] private float waitingTime = 1f;
     [SerializeField] private float speed = .25f;
     [SerializeField] private List<Transform> waypoints;
@@ -24,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
-        firstWaitingTime = UnityEngine.Random.Range(1.0f, 3.0f);
+        firstWaitingTime = Random.Range(1.0f, 3.0f);
         startPosition = transform.position;
     }
     void Update()
@@ -65,31 +61,18 @@ public class MovingPlatform : MonoBehaviour
             if (currentWaypoint > waypoints.Count - 1) currentWaypoint = 0;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
+        if (Utils.Get().CheckLayerInPlayer(other.gameObject.layer))
         {
             player = other.transform.parent.gameObject.GetComponent<PlayerController>();
             player.transform.SetParent(transform);
             exitPlayer = false;
         }
     }
-
-    /*private void OnTriggerStay2D(Collider2D other)
-    {
-        if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
-        {
-            if (player != null)
-            {
-                
-            }
-        }
-    }*/
-
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (Utils.CheckLayerInMask(movableMask, other.gameObject.layer))
+        if (Utils.Get().CheckLayerInPlayer(other.gameObject.layer))
         {
             if (player != null)
             {
@@ -98,7 +81,6 @@ public class MovingPlatform : MonoBehaviour
             }
         }
     }
-
     private void ExitPlayerParent()
     {
         if (exitPlayer)
