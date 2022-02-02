@@ -5,7 +5,7 @@ using System;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
-
+    public LevelPrefabs prefabs;
     public PlayerController GetPlayer() => player;
 
     [SerializeField] PlayerController player;
@@ -67,4 +67,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         OnGameEnded?.Invoke();
     }
 
+}
+
+[Serializable]
+public class LevelPrefabs
+{
+    public GameObject checkPoint;
+    public GameObject currency;
+    public GameObject fakeGround;
+    public GameObject platform;
 }

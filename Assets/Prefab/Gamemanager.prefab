@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2443868846474446116}
   - component: {fileID: 2443868846474446119}
+  - component: {fileID: 1104707678}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -46,3 +47,25 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   player: {fileID: 0}
   obstaclesManager: {fileID: 0}
+--- !u!114 &1104707678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443868846474446118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8699e1f317e0a145adc314e23c28821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  spikeLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 512
