@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702025746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5040001, y: 0.891, z: 0}
+  m_LocalPosition: {x: 1.94, y: 0.074, z: 0}
   m_LocalScale: {x: 2.8, y: 22.2, z: 1}
   m_Children: []
   m_Father: {fileID: 1692570426930189326}
@@ -140,7 +140,6 @@ Transform:
   m_Children:
   - {fileID: 1702025747}
   - {fileID: 4784462908511901378}
-  - {fileID: 5136315551248870688}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -295,7 +294,7 @@ GameObject:
   - component: {fileID: 179209417450145158}
   - component: {fileID: 407500232354279888}
   m_Layer: 9
-  m_Name: Sprite
+  m_Name: StickSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5136315551248870688}
   m_Layer: 9
-  m_Name: Stick
+  m_Name: StickPivote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,13 +387,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2783128307531581412}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.831, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.100000024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 179209417450145158}
-  m_Father: {fileID: 1692570426930189326}
-  m_RootOrder: 2
+  m_Father: {fileID: 4784462908511901378}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5648199607710927837
 GameObject:
@@ -423,7 +422,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.931, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5136315551248870688}
   m_Father: {fileID: 1692570426930189326}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

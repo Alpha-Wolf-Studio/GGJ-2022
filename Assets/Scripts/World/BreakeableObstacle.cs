@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakeableObstacle : MonoBehaviour
@@ -20,7 +18,6 @@ public class BreakeableObstacle : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
     }
-
     public void Break()
     {
         if (broken)
