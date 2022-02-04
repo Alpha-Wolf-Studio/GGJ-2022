@@ -5,10 +5,11 @@ using UnityEngine;
 public class LevelManager : MonoBehaviourSingleton<LevelManager>
 {
     [SerializeField] private ParentGroup parents = new ParentGroup();
-    [Header("Modificable:")]
-    [SerializeField] private List<GameObject> currencies = new List<GameObject>();
+    List<GameObject> currencies = new List<GameObject>();
 
-    private int currenciesCount;
+    [Header("Modificable:")] 
+    [SerializeField] private int currenciesCount;
+    private int lastCurrenciesCount;
 
     private void Start()
     {
@@ -17,11 +18,8 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
 #if UNITY_EDITOR
     private void Update()
     {
-        if (currencies.Count != currenciesCount)
-        {
-            currenciesCount = currencies.Count;
-            Instantiate(GameManager.Get().prefabs.currency, Vector3.zero, Quaternion.identity, parents.platforms);
-        }
+        
+
     }
 #endif
 }

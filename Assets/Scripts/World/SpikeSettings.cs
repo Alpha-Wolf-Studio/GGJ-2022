@@ -4,10 +4,10 @@ using UnityEngine;
 public class SpikeSettings : MonoBehaviour
 {
     private float spikeWidth = 0.7f;
-    private List<GameObject> spikes = new List<GameObject>();
+    [HideInInspector] public List<GameObject> spikes = new List<GameObject>();
     [SerializeField] private GameObject spike;
     [SerializeField] private List<Sprite> spritesList = new List<Sprite>();
-
+    [HideInInspector] public bool flipY = false;
     [Header("Configurable:")] 
     public bool updateSettings;
     public int lenght = 1;
@@ -17,17 +17,22 @@ public class SpikeSettings : MonoBehaviour
         if(!updateSettings) return;
         updateSettings = false;
 
+        UpdateScript();
+    }
+    public void UpdateScript()
+    {
         ClearList();
         for (int i = 0; i < lenght; i++)
         {
             GameObject go = Instantiate(spike, Vector3.zero, Quaternion.identity, transform);
-            go.transform.localPosition = new Vector3(spikeWidth* i, 0, 0);
+            go.transform.localPosition = new Vector3(spikeWidth * i, 0, 0);
             go.name = "Spike(" + i + ")";
 
             SpriteRenderer goRenderer = go.GetComponent<SpriteRenderer>();
             int randomIndezSprite = Random.Range(0, spritesList.Count);
             goRenderer.sprite = spritesList[randomIndezSprite];
             goRenderer.flipX = Random.Range(0, 2) == 1;
+            goRenderer.flipY = flipY;
 
             spikes.Add(go);
         }
